@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Diagnosa\DiagnosaController;
 use App\Http\Controllers\API\Diagnosa\DianosaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Route Taroh Disini Ya!
-Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"]);
+Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"])->name('upload.file');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

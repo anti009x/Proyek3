@@ -17,7 +17,7 @@ class DianosaController extends Controller
         $tmpFileName = uniqid() . '.' . $file->getClientOriginalExtension();
         $tmpFilePath = $file->storeAs('tmp', $tmpFileName); // Store Ke Temp
 
-        $remoteUrl = 'http://127.0.0.1:8000/uploadgambar';
+        $remoteUrl = 'http://127.0.0.1:8000/uploadgambar/';
         $postData = [
             'file' => new \CURLFile(storage_path('app/' . $tmpFilePath), $file->getClientMimeType(), $file->getClientOriginalName()),
         ];
