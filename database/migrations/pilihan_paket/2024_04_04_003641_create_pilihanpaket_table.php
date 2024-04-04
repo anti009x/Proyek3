@@ -15,8 +15,9 @@ return new class extends Migration
         Schema::create('pilihanpaket', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->string('nama_paket');
-            $table->string('harga_paket');
+            $table->string('Nama_Paket');
+            $table->string('Harga_Paket');
+            $table->foreignId('nama_kurir');
             $table->timestamps();
         });
     }
