@@ -18,20 +18,18 @@ class InputPesanan extends Model
         'Alamat_Tujuan',
         'status_pembayaran',
         'Nama_Kurir',
+        'nama',
+        
     ];
 
-    public function Kurir()
+    public function User()
+    {
+        return $this->hasMany(User::class, 'nama');
+    }
+
+    public function kurir()
     {
         return $this->belongsTo(Kurir::class, 'Nama_Kurir');
     }
 
-    public function PilihanPaket()
-    {
-        return $this->belongsTo(PilihanPaket::class, 'Harga_Paket', 'Harga_Paket');
-    }
-
-    public function User()
-    {
-        return $this->belongsTo(User::class, 'nama', 'nama');
-    }
 }
