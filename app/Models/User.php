@@ -15,7 +15,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'Nama_Kurir', // Changed from Nama_Kurir
+        'Nama_Kurir', // Changed from Name_Kurir
     ];
 
     protected $hidden = [
@@ -30,6 +30,6 @@ class User extends Authenticatable
 
     public function kurir()
     {
-        return $this->belongsTo(Kurir::class, 'Nama_Kurir', 'Nama_Kurir');
+        return $this->belongsTo(Kurir::class, 'Nama_Kurir');
     }
 }
