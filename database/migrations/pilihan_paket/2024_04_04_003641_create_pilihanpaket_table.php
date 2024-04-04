@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->string('Nama_Paket');
             $table->string('Harga_Paket');
+            $table->foreignId('nama_kurir');
             $table->timestamps();
         });
     }

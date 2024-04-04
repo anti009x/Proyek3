@@ -17,14 +17,12 @@ class InputPesanan extends Model
         'Berat_Barang',
         'Alamat_Tujuan',
         'status_pembayaran',
-        'nama',
-        'Harga_Paket',
         'Nama_Kurir',
     ];
 
     public function Kurir()
     {
-        return $this->belongsTo(Kurir::class, 'Nama_Kurir', 'Nama_Kurir');
+        return $this->belongsTo(Kurir::class, 'Nama_Kurir');
     }
 
     public function PilihanPaket()

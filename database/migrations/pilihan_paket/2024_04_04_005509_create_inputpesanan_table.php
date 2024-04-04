@@ -16,9 +16,6 @@ return new class extends Migration
     {
         Schema::create('inputpesanan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(User::class);
-            $table->foreignId(Kurir::class);
-            $table->foreignId(PilihanPaket::class);
             $table->string('Nama_Barang');
             $table->string('Generate_Resi');
             $table->integer('Berat_Barang');

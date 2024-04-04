@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('kurir', function (Blueprint $table) {
             $table->id();
             $table->string('Nama_Kurir');
-            $table->string('Nomor_Telepon');
-            $table->string('Alamat');
-            $table->integer('Gaji');
-            $table->foreignId(InputPesanan::class);
+            $table->string('Nomor_Telepon')->nullable(true);
+            $table->string('Alamat')->nullable(true);
+            $table->integer('Gaji')->nullable(true);
+            // $table->foreignId(InputPesanan::class);
             $table->timestamps();
         });
     }
