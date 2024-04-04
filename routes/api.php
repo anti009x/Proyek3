@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\API\Diagnosa\DiagnosaController;
 use App\Http\Controllers\API\Diagnosa\DianosaController;
+use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 //Route Taroh Disini Ya!
 Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"])->name('upload.file');
+Route::get("/get", [TestDiagnosaController::class, "index"]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
