@@ -34,7 +34,8 @@
             color: rgb(255, 0, 0);
             font-style: italic;
             text-transform: uppercase;
-            font-size: 5vh
+            font-size: 5vh;
+            line-height: 2vh;
             
             
             
