@@ -19,8 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Route Taroh Disini Ya!
+//Ai / Klasifikasi
 Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"])->name('upload.file');
 Route::get("/get", [TestDiagnosaController::class, "index"]);
+
+//Input Pesanan
 Route::get("/inputpesanan", [InputPesananController::class, "index"]);
 Route::post("/inputpesanan", [InputPesananController::class, "store"]);
 Route::put("/inputpesanan/{id}", [InputPesananController::class, "update"]);
