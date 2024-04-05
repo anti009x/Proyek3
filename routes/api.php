@@ -23,8 +23,9 @@ use Illuminate\Support\Facades\Route;
 */
 //Route Taroh Disini Ya!
 //Ai / Klasifikasi
-Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"])->name('upload.file');
 Route::get("/get", [TestDiagnosaController::class, "index"]);
+Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"])->name('upload.file');
+
 
 //Input Pesanan
 Route::get("/inputpesanan", [InputPesananController::class, "index"]);
@@ -42,11 +43,14 @@ Route::delete("/input_pilihan_paket/{id}", [PilihanPaketController::class, "dest
 //Akun Konsumen
 Route::post("/register", [UserController::class, "register"]);
 Route::post("/login", [UserController::class, "login"]);
-
+Route::put("/userupdate/{id}", [UserController::class, "update"]);
+Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
+Route::get("/datauser",[UserController::class,"index"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/detailuserlogin', function (Request $request) {
         return $request->user();
     });
     Route::get("/logout",[UserController::class,"logout"]);
+
 });

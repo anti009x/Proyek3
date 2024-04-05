@@ -24,6 +24,8 @@ class UserController extends Controller
 
         ]);
 
+
+
         if ($validator->fails()){
             return response()->json([
                 'success'=>false,
@@ -46,6 +48,8 @@ class UserController extends Controller
 
         ]);
     }
+
+
 
     public function login(Request $request)
     {
@@ -81,6 +85,59 @@ class UserController extends Controller
             'message' => 'Berhasil Logout',
             'Akun Yang Logout Adalah' => $success,
         ], 200);
+    }
+
+
+    public function index(){
+        $user = User::all();
+        return response()->json([
+            'message' => $user
+        ]);
+    }
+
+    public function update(Request $request ,$id)
+    {
+        $user = Auth::user();
+
+         $request->validate([
+            'nama' => 'required',
+            'nohp' => 'required',
+            // 'alamat' => 'required',
+        ]);
+            ///Abaikan Jika method update nya error !
+        $user = User::find($id);
+        if (!$user){
+            return response()->json([
+                'message' => 'Update Error Index Out Of Range',
+                // 'data' => $user
+            ],404);
+        $user->update($request->all());
+        }else{
+            return response()->json([
+                'message' => 'Update Succes',
+                'data' => $user
+            ],200);
+        }
+
+
+
+
+
+    }
+
+    public function delete($id){
+        $user = User::find($id);
+        if (!$user){
+            return response()->json([
+                'message' => 'Delete Error: User Not Found',
+            ],404);
+        }
+        $user->delete();
+        $success['nama'] = $user->nama;
+        return response()->json([
+            'message' => 'Delete Success',
+            'data' => $success
+        ],200);          
     }
 }
 
