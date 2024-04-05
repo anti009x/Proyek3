@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
 use App\Http\Controllers\Api\Pilihan_Paket\InputPesananController;
 use App\Http\Controllers\API\Pilihan_Paket\PilihanPaketController;
 use App\Http\Controllers\API\User\UserController;
+use App\Http\Controllers\API\User\UserlocationController;
 use App\Models\PilihanPaket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,8 @@ Route::post("/login", [UserController::class, "login"]);
 Route::put("/userupdate/{id}", [UserController::class, "update"]);
 Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
 Route::get("/datauser",[UserController::class,"index"]);
+
+Route::get("/lokasi",[UserlocationController::class,"lokasi"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/detailuserlogin', function (Request $request) {
