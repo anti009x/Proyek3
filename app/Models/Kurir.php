@@ -16,11 +16,13 @@ class Kurir extends Model
         'Nomor_Telepon',
         'Alamat',
         'Gaji',
-        'nama',
+        'Nama_Barang'
+
     ];
 
-    public function users()
+    public function InputPesanan()
     {
-        return $this->hasMany(User::class, 'nama');
+        return $this->belongsTo(InputPesanan::class, 'Nama_Barang');
     }
+
 }
