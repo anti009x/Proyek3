@@ -19,9 +19,11 @@
             font-family: Arial, Helvetica, sans-serif;
             margin-top: 20px;
             color: white;
+            flex: 1
            }
            img{
-            position: relative;
+            position: absolute;
+       
            }
            .container{
                 justify-content: center;

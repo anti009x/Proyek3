@@ -19,12 +19,20 @@ class InputPesanan extends Model
         'status_pembayaran',
         'Nama_Kurir',
         'nama',
+        'Nama_Paket',
+        'Harga'
+
         
     ];
 
     public function User()
     {
-        return $this->hasMany(User::class, 'nama');
+        return $this->belongsTo(User::class, 'nama');
+    }
+
+    public function Pesanan(){
+        return $this->hasMany(PilihanPaket::class,'Nama_Paket');
+
     }
 
     public function kurir()

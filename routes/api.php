@@ -3,7 +3,10 @@
 use App\Http\Controllers\API\Diagnosa\DiagnosaController;
 use App\Http\Controllers\API\Diagnosa\DianosaController;
 use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
-use App\Http\Controllers\Api\InputPesananController;
+use App\Http\Controllers\Api\Pilihan_Paket\InputPesananController;
+use App\Http\Controllers\API\Pilihan_Paket\PilihanPaketController;
+use App\Http\Controllers\API\User\UserController;
+use App\Models\PilihanPaket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +32,21 @@ Route::post("/inputpesanan", [InputPesananController::class, "store"]);
 Route::put("/inputpesanan/{id}", [InputPesananController::class, "update"]);
 Route::delete("/inputpesanan/{id}", [InputPesananController::class, "destroy"]);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Pilihan Paket
+
+Route::get("/input_pilihan_paket", [PilihanPaketController::class, "index"]);
+Route::post("/input_pilihan_paket", [PilihanPaketController::class, "store"]);
+Route::put("/input_pilihan_paket/{id}", [PilihanPaketController::class, "update"]);
+Route::delete("/input_pilihan_paket/{id}", [PilihanPaketController::class, "destroy"]);
+
+//Akun Konsumen
+Route::post("/register", [UserController::class, "register"]);
+Route::post("/login", [UserController::class, "login"]);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/detailuserlogin', function (Request $request) {
+        return $request->user();
+    });
+    Route::get("/logout",[UserController::class,"logout"]);
 });
