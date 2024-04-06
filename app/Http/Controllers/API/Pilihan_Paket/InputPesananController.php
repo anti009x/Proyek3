@@ -25,7 +25,7 @@ class InputPesananController extends Controller
             'Alamat_Tujuan' => 'required',
             'status_pembayaran' => 'required',
             // 'Nama_Kurir' => 'required',
-            // 'nama' => 'required',
+            // // 'nama' => 'required',
             // 'Nama_Paket' => 'required',
         ]);
 

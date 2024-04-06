@@ -28,6 +28,7 @@ class UserlocationController extends Controller
                 'Lokasi Anda'=>$position->countryName,
                 'Code Lokasi Anda'=>$position->countryCode,
                 'Kota Anda'=>$position->cityName,
+                'Zip Code' => $position->zipCode
             ]);
 
 
