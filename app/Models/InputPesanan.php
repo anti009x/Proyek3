@@ -20,7 +20,7 @@ class InputPesanan extends Model
         'Nama_Kurir',
         'nama',
         'Nama_Paket',
-        'Harga'
+        'Harga_Paket'
 
         
     ];
@@ -32,8 +32,11 @@ class InputPesanan extends Model
 
     public function Pesanan(){
         return $this->hasMany(PilihanPaket::class,'Nama_Paket');
+        return $this->hasMany(PilihanPaket::class,'Harga_Paket');
 
     }
+
+    
 
     public function kurir()
     {

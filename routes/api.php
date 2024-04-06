@@ -5,8 +5,10 @@ use App\Http\Controllers\API\Diagnosa\DianosaController;
 use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
 use App\Http\Controllers\Api\Pilihan_Paket\InputPesananController;
 use App\Http\Controllers\API\Pilihan_Paket\PilihanPaketController;
+use App\Http\Controllers\API\User\PembayaranController;
 use App\Http\Controllers\API\User\UserController;
 use App\Http\Controllers\API\User\UserlocationController;
+use App\Models\Pembayaran;
 use App\Models\PilihanPaket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,11 +24,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+
+
 //Route Taroh Disini Ya!
 //Ai / Klasifikasi
 Route::get("/get", [TestDiagnosaController::class, "index"]);
 Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"])->name('upload.file');
 
+
+//Midtrans
+Route::post('/payment', [PembayaranController::class, 'pay']); #->name('donation.pay');
+Route::get('/payment',[PembayaranController::class,'index']);
 
 //Input Pesanan
 Route::get("/inputpesanan", [InputPesananController::class, "index"]);

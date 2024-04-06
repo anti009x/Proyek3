@@ -18,11 +18,12 @@ class CreateInputpesananTable extends Migration
             $table->string('Berat_Barang');
             $table->string('Alamat_Tujuan');
             $table->string('status_pembayaran');
+            $table->string('Harga_Paket')->default(30000);
             // $table->foreignIdFor(PilihanPaket::class,'Nama_Paket');
             // $table->foreignIdFor(User::class,'nama');
             // $table->foreignIdFor(Kurir::class,'Nama_Kurir');
             //Komentar Data Ini Jika Sudah Running Di Program
-            // $table->string('Nama_Paket');
+            $table->string('Nama_Paket')->default('Paket Cepat');
             // $table->string('nama');
             // $table->string('Nama_Kurir');
 
