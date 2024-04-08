@@ -9,7 +9,7 @@ class InputPesanan extends Model
 {
     use HasFactory;
 
-    protected $table = 'inputpesanan';
+    protected $table = 'inputpesananss';
 
     protected $fillable = [
         'Nama_Barang',
@@ -19,28 +19,35 @@ class InputPesanan extends Model
         'status_pembayaran',
         'Nama_Kurir',
         'nama',
-        'Nama_Paket',
-        'Harga_Paket'
+        'pilihanpakets_id',
+        'kurirs_id',
+        'nama'
 
         
     ];
 
+
     public function User()
     {
-        return $this->belongsTo(User::class, 'nama');
+        return $this->hasMany(User::class, 'nama', 'nama');
     }
 
-    public function Pesanan(){
-        return $this->hasMany(PilihanPaket::class,'Nama_Paket');
-        return $this->hasMany(PilihanPaket::class,'Harga_Paket');
+    // public function User()
+    // {
+    //     return $this->belongsTo(User::class, 'nama');
+    // }
 
-    }
+    // public function Pesanan(){
+    //     return $this->hasMany(PilihanPaket::class,'Nama_Paket');
+    //     return $this->hasMany(PilihanPaket::class,'Harga_Paket');
+
+    // }
 
     
 
-    public function kurir()
-    {
-        return $this->belongsTo(Kurir::class, 'Nama_Kurir');
-    }
+    // public function kurir()
+    // {
+    //     return $this->belongsTo(Kurir::class, 'Nama_Kurir');
+    // }
 
 }

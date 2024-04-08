@@ -11,13 +11,22 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table='userss';
+
     protected $fillable = [
+        // 'id',
         'nama',
         'email',
         'nohp',
         'password',
-        'Nama_Kurir', // Changed from Name_Kurir
+        'Nama_Kurir', // Rubah Nama_Kurir -<Valid coy
+        'role_id'
     ];
+
+    public function InputPesanan()
+    {
+        return $this->belongsTo(InputPesanan::class, 'nama', 'nama');
+    }
 
     protected $hidden = [
         'password',
@@ -29,8 +38,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function kurir()
-    {
-        return $this->belongsTo(Kurir::class, 'Nama_Kurir');
-    }
+    // public function kurir()
+    // {
+    //     return $this->belongsTo(Kurir::class, 'Nama_Kurir');
+    // }
 }
