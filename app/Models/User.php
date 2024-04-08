@@ -28,6 +28,11 @@ class User extends Authenticatable
         return $this->belongsTo(InputPesanan::class, 'nama', 'nama');
     }
 
+    public function Pesan()
+    {
+        return $this->belongsTo(Pesan::class, 'nama', 'nama');
+    }
+
     protected $hidden = [
         'password',
         'remember_token',

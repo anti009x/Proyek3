@@ -3,26 +3,45 @@
 namespace App\Http\Controllers\API\Pesan;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Broadcasting\Broadcasters\PusherBroadcaster;
+use App\Models\Pesan;
 use Illuminate\Http\Request;
-use Pusher\Pusher;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PesanController extends Controller
 {
-    public function index(){
+    public function kirimpesan(Request $request)
+    {
+ 
+        $user = Auth::id();
 
-    }
 
-    public function siaran(Request $request){
-        broadcast(new PusherBroadcaster($request->get('pusher')))->toOthers();
-        return response()->json([
-            'pusher' => $request->get('pusher')
+        $validatedData = $request->validate([
+            'kirim_pesan' => 'required',
+            'nama' => 'required',
         ]);
-    }
-    public function penerima(Request $request){
-        return response()->json([
-            'pusher' => $request->get('pusher')
-        ]);
-    }
 
+
+        $penerimaName = $request->input('nama');
+        $kirimpesan = $request->input('kirim_pesan');
+
+
+        $penerima = User::where('nama', $penerimaName)->first();
+
+        $pengirim = 'userss_id';
+
+
+        if ($user && $penerima) {
+
+            $pesan = Pesan::create([
+                $pengirim => $user, 
+                'kirim_pesan' => $kirimpesan,
+                'nama' => $penerimaName, 
+            ]);
+
+            return response()->json(['message' => 'Pesan berhasil dikirim', 'data' => $pesan], 200);
+        } else {
+            return response()->json(['message' => 'Pesan Gagal Terkirim / Penerima Tidak Ada !'], 404);
+        }
+    }
 }
