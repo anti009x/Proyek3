@@ -9,10 +9,18 @@ use Illuminate\Support\Facades\Auth; // Import the Auth facade
 
 class InputPesananController extends Controller
 {
-    public function index()
-    {
-        $inputPesanan = InputPesanan::all();
-        return response()->json($inputPesanan);
+    public function riwayatpesanan()
+    {   
+        $user = Auth::user();
+        ///Filter User Berdasarakan User Login yang mengirim data pesanan supaya setiap user punya riwayat pesanan-masing-masing
+        if ($user){
+            $inputPesanan = InputPesanan::where('nama', $user->nama)->get();
+            return response()->json($inputPesanan);
+        }else{
+            return response()->json([
+                'message'=>false
+            ]);
+        }
     }
 
     public function store(Request $request)

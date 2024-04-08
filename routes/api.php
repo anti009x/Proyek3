@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Diagnosa\DiagnosaController;
 use App\Http\Controllers\API\Diagnosa\DianosaController;
 use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
 use App\Http\Controllers\API\Kurir\KurirController;
+use App\Http\Controllers\API\Pesan\PesanController;
 use App\Http\Controllers\Api\Pilihan_Paket\InputPesananController;
 use App\Http\Controllers\API\Pilihan_Paket\PilihanPaketController;
 use App\Http\Controllers\API\User\PembayaranController;
@@ -63,12 +64,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/datauser",[UserController::class,"index"]);
 
     //Input Pesanan
-    Route::get("/inputpesanan", [InputPesananController::class, "index"]);
+    Route::get("/riwayatpesanan", [InputPesananController::class, "riwayatpesanan"]);
     Route::post("/inputpesanan", [InputPesananController::class, "store"]);
     Route::put("/inputpesanan/{id}", [InputPesananController::class, "update"]);
     Route::delete("/inputpesanan/{id}", [InputPesananController::class, "destroy"]);
 
     //Data Kurir
     Route::get("/kurir",[KurirController::class,"index"]);
+
+    Route::post("/pesan",[PesanController::class,"kirimpesan"]);
+    
 
 });
