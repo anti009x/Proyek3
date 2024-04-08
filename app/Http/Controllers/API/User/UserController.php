@@ -20,6 +20,8 @@ class UserController extends Controller
             'nohp'=>'required',
             'email'=>'required|email',
             'password'=>'required',
+            'role_id'=>'required',
+            'alamat',
 
 
         ]);
@@ -102,7 +104,7 @@ class UserController extends Controller
          $request->validate([
             'nama' => 'required',
             'nohp' => 'required',
-            // 'alamat' => 'required',
+            'alamat',
         ]);
             ///Abaikan Jika method update nya error !
         $user = User::find($id);

@@ -10,7 +10,7 @@ class PilihanPaket extends Model
 {
     use HasFactory;
 
-    protected $table = 'pilihanpaket';
+    protected $table = 'pilihanpakets';
     protected $fillable = [
         'Nama_Paket',
         'Harga_Paket',
@@ -23,8 +23,8 @@ class PilihanPaket extends Model
         
     // }
 
-        public function InputPesanan(){
-            return $this->belongsTo(InputPesanan::class,'id');
-        }
+        // public function InputPesanan(){
+        //     return $this->belongsTo(InputPesanan::class,'id');
+        // }
 
 }
