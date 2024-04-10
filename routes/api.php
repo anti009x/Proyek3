@@ -50,6 +50,9 @@ Route::post("/login", [UserController::class, "login"]);
     Route::delete("/input_pilihan_paket/{id}", [PilihanPaketController::class, "destroy"]);
 
 
+
+
+
 Route::get("/lokasi",[UserlocationController::class,"lokasi"]);
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -57,11 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-    //Akun Konsumen
-    Route::get("/logout",[UserController::class,"logout"]);
-    Route::put("/userupdate/{id}", [UserController::class, "update"]);
-    Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
-    Route::get("/datauser",[UserController::class,"index"]);
+
 
     //Input Pesanan
     Route::get("/riwayatpesanan", [InputPesananController::class, "riwayatpesanan"]);
@@ -73,6 +72,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/kurir",[KurirController::class,"index"]);
 
     Route::post("/pesan",[PesanController::class,"kirimpesan"]);
+
+        //Akun Konsumen
+        Route::get("/logout",[UserController::class,"logout"]);
+        Route::put("/userupdate/{id}", [UserController::class, "update"]);
+        Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
+        Route::get("/datauser",[UserController::class,"index"]);
     
 
 });

@@ -17,14 +17,15 @@ class PilihanPaket extends Model
         // 'Nama Kurir',
     ];
 
-    // public function Kurir(){
-        
-    //     return $this->hasMany(Kurir::class,'Nama_Kurir');
-        
-    // }
+    public function InputPesanan()
+    {
+        return $this->belongsTo(InputPesanan::class, 'Nama_Paket', 'Nama_Paket');
+    }
 
-        // public function InputPesanan(){
-        //     return $this->belongsTo(InputPesanan::class,'id');
-        // }
+    public function pilihanPaketByHarga()
+    {
+        return $this->belongsTo(PilihanPaket::class, 'Harga_Paket', 'Harga_Paket');
+    }
+
 
 }

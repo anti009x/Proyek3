@@ -16,16 +16,19 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id')->constrained('roles');
             $table->integer('gaji');
+            $table->string('nama');
             $table->timestamps();
         });
-    
         DB::table('kurirs')->insert([
             ['role_id' => 3 , 
             'gaji' => 40000,
+            'nama' => 'Joko',
             'created_at' => now(),
             'updated_at' => now(),],
         ]);
     }
+    
+
 
     /**
      * Reverse the migrations.

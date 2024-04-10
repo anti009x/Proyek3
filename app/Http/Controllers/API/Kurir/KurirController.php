@@ -8,21 +8,19 @@ use Illuminate\Http\Request;
 
 class KurirController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        $kurir = Kurir::with('user')->get();
 
-        $kurir = Kurir::all();
-
-        if ($kurir->isNotEmpty()){
+        if ($kurir->isNotEmpty()) {
             return response()->json([
-                'massage' => true,
-                'Data Kurir Nya' => $kurir
+                'message' => true,
+                'Data Kurir' => $kurir
             ]);
-        }else{
-                return response()->json([
-                    'massage'=>false,
-                ]);
+        } else {
+            return response()->json([
+                'message' => false,
+            ]);
         }
     }
-
-
 }
