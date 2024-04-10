@@ -5,59 +5,62 @@ namespace App\Http\Controllers\API\Pilihan_Paket;
 use App\Http\Controllers\Controller;
 use App\Models\InputPesanan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Import the Auth facade
+use Illuminate\Support\Facades\Auth; 
 
 class InputPesananController extends Controller
 {
     public function riwayatpesanan()
     {   
         $user = Auth::user();
-        ///Filter User Berdasarakan User Login yang mengirim data pesanan supaya setiap user punya riwayat pesanan-masing-masing
+
         if ($user){
-            $inputPesanan = InputPesanan::where('nama', $user->nama)->get();
+            // Menggunakan manual aja (gk jadi pake loading pusing we ) untuk mengambil data Riwayat,
+            $inputPesanan = InputPesanan::with('pilihanPaketByNama', 'pilihanPaketByHarga', 'kurir')
+                                        ->where('nama', $user->nama)
+                                        ->get();
+
             return response()->json($inputPesanan);
-        }else{
-            return response()->json([
-                'message'=>false
-            ]);
+        } else {
+            return response()->json(['message' => false]);
         }
     }
 
     public function store(Request $request)
-
     {
         $user = Auth::user();
         $validatedData = $request->validate([
-            'Nama_Barang' => 'required',
-            'Generate_Resi' => 'required',
-            'Berat_Barang' => 'required',
-            'Alamat_Tujuan' => 'required',
-            'status_pembayaran' => 'required',
-            'pilihanpakets_id' => 'required',
-            'kurirs_id' => 'required',
+            'Nama_Barang'=>'required',
+            'Alamat_Tujuan'=>'required',
+            'Nama_Paket'=>'required',
+            'Harga_Paket'=>'required',
+            'Nama_Kurir'=>'required',
         ]);
-
 
         $validatedData['nama'] = $user->nama;
         $inputPesanan = InputPesanan::create($validatedData);
+
+        // Load data kurir terkait dengan pesanan yang baru dibuat
+        $inputPesanan->load('kurir');
+
         return response()->json(['message' => 'Data Berhasil Ditambahkan', 'data' => $inputPesanan], 200);
     }
 
     public function show(InputPesanan $inputPesanan)
     {
+        // Menggunakan model load = loading untuk mengambil data pilihan paket terkait dengan pesanan !
+        $inputPesanan->load('pilihanPaketByNama', 'pilihanPaketByHarga' , 'kurir');
+        
         return response()->json($inputPesanan);
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'Nama_Barang',
-            'Generate_Resi',
-            'Berat_Barang',
-            'Alamat_Tujuan',
-            'status_pembayaran',
-            'pilihanpakets_id',
-            'kurirs_id',
+            'Nama_Barang'=>'required',
+            'Alamat_Tujuan'=>'required',
+            'Nama_Paket'=>'required',
+            'Harga_Paket'=>'required',
+            'Nama_Kurir'=>'required',
         ]);
 
         $inputPesanan = InputPesanan::findOrFail($id);

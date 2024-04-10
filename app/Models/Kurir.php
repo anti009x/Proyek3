@@ -12,7 +12,19 @@ class Kurir extends Model
     protected $table = 'kurirs';
     protected $fillable = [
         'role_id',
-        'gaji'
+        'gaji',
+        'nama',
     ];
+
+    public function user()
+    {
+        return $this->hasMany(User::class, 'nama', 'nama');
+    }
+
+    public function inputPesanan()
+    {
+        return $this->hasMany(InputPesanan::class, 'Nama_Kurir', 'nama');
+    }
+
 
 }

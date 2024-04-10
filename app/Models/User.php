@@ -28,10 +28,18 @@ class User extends Authenticatable
         return $this->belongsTo(InputPesanan::class, 'nama', 'nama');
     }
 
+    
+    public function Kurir()
+    {
+        return $this->belongsTo(Kurir::class, 'nama', 'nama');
+    }
+
     public function Pesan()
     {
         return $this->belongsTo(Pesan::class, 'nama', 'nama');
     }
+    
+
 
     protected $hidden = [
         'password',

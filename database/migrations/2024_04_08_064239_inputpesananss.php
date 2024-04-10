@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('Nama_Barang');
             $table->string('nama');
-            $table->string('Generate_Resi');
-            $table->string('Berat_Barang');
             $table->string('Alamat_Tujuan');
-            $table->string('status_pembayaran');
-            $table->foreignId('pilihanpakets_id')->constrained('pilihanpakets');
-            $table->foreignId('kurirs_id')->constrained('kurirs');
+            $table->string('Nama_Paket');
+            $table->integer('Harga_Paket');
+            $table->string('Nama_Kurir');
+
+
+
             $table->timestamps();
         });
     }
