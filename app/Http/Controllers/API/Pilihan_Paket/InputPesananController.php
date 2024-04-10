@@ -14,7 +14,7 @@ class InputPesananController extends Controller
         $user = Auth::user();
 
         if ($user){
-            // Menggunakan  loading untuk mengambil data pilihan paket, termasuk data kurir terkait dengan setiap pesanan
+            // Menggunakan manual aja (gk jadi pake loading pusing we ) untuk mengambil data Riwayat,
             $inputPesanan = InputPesanan::with('pilihanPaketByNama', 'pilihanPaketByHarga', 'kurir')
                                         ->where('nama', $user->nama)
                                         ->get();
@@ -47,8 +47,8 @@ class InputPesananController extends Controller
 
     public function show(InputPesanan $inputPesanan)
     {
-        // Menggunakan eager loading untuk mengambil data pilihan paket terkait dengan pesanan
-        $inputPesanan->load('pilihanPaketByNama', 'pilihanPaketByHarga');
+        // Menggunakan model load = loading untuk mengambil data pilihan paket terkait dengan pesanan !
+        $inputPesanan->load('pilihanPaketByNama', 'pilihanPaketByHarga' , 'kurir');
         
         return response()->json($inputPesanan);
     }
