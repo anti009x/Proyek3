@@ -24,6 +24,26 @@ class InputPesananController extends Controller
             return response()->json(['message' => false]);
         }
     }
+    public function riwayatpesananbyid($id)
+    {   
+        $user = Auth::user();
+    
+        if ($user){
+            // Menggunakan manual aja (gk jadi pake loading pusing we ) untuk mengambil data Riwayat,
+            $inputPesanan = InputPesanan::with('pilihanPaketByNama', 'pilihanPaketByHarga', 'kurir')
+                                        ->where('nama', $user->nama)
+                                        ->where('id', $id)
+                                        ->first();
+    
+            if (!$inputPesanan) {
+                return response()->json(['message' => 'Pesanan tidak ditemukan'], 404);
+            }
+    
+            return response()->json($inputPesanan);
+        } else {
+            return response()->json(['message' => false], 401);
+        }
+    }
 
     public function store(Request $request)
     {
