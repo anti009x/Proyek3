@@ -30,9 +30,9 @@ use Illuminate\Support\Facades\Route;
 
 
 //Route Taroh Disini Ya!
-//Ai / Klasifikasi
-Route::get("/get", [TestDiagnosaController::class, "index"]);
-Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"])->name('upload.file');
+    //Ai / Klasifikasi
+    Route::get("/get", [TestDiagnosaController::class, "index"]);
+    Route::post("/send-klasifikasi", [DianosaController::class, "sendFile"])->name('upload.file');
 
 
 //Midtrans
@@ -61,9 +61,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-
     //Input Pesanan
-    Route::get("/riwayatpesanan", [InputPesananController::class, "riwayatpesanan"]);
+        //Riwayat Pesanan
+        Route::get("/riwayatpesanan", [InputPesananController::class, "riwayatpesanan"]);
+        Route::get("/riwayatpesanan/{id}", [InputPesananController::class, "riwayatpesananbyid"]);
     Route::post("/inputpesanan", [InputPesananController::class, "store"]);
     Route::put("/inputpesanan/{id}", [InputPesananController::class, "update"]);
     Route::delete("/inputpesanan/{id}", [InputPesananController::class, "destroy"]);
