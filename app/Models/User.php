@@ -27,7 +27,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(InputPesanan::class, 'nama', 'nama');
     }
-
+    public function isActive()
+    {
+        return $this->active; 
+    }
     
     public function Kurir()
     {
@@ -37,6 +40,10 @@ class User extends Authenticatable
     public function Pesan()
     {
         return $this->belongsTo(Pesan::class, 'nama', 'nama');
+    }
+
+    public function Rating(){
+        return $this->belongsTo(Rating::class,'nama','nama');
     }
     
 

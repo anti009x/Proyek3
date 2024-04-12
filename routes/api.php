@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Diagnosa\DianosaController;
 use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
 use App\Http\Controllers\API\Kurir\KurirController;
 use App\Http\Controllers\API\Pesan\PesanController;
+use App\Http\Controllers\API\Pesan\RatingController;
 use App\Http\Controllers\Api\Pilihan_Paket\InputPesananController;
 use App\Http\Controllers\API\Pilihan_Paket\PilihanPaketController;
 use App\Http\Controllers\API\User\PembayaranController;
@@ -79,6 +80,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put("/userupdate/{id}", [UserController::class, "update"]);
         Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
         Route::get("/datauser",[UserController::class,"index"]);
+
+        //Rating
+
+        Route::post("/rating",[RatingController::class,"store"]);
+
+        Route::get("/data_rating",[RatingController::class,"index"]);
     
 
 });
