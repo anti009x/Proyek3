@@ -104,34 +104,26 @@ class UserController extends Controller
             ],404);
         }
     }
-    public function update(Request $request ,$id)
+    public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
-         $request->validate([
-            'nama' => 'required',
-            'nohp' => 'required',
-            'alamat',
+        $request->validate([
+            'alamat' => 'required',
         ]);
-            ///Abaikan Jika method update nya error !
-        $user = User::find($id);
-        if (!$user){
+
+        if (!$user) {
             return response()->json([
-                'message' => 'Update Error Index Out Of Range',
-                // 'data' => $user
-            ],404);
-        $user->update($request->all());
-        }else{
-            return response()->json([
-                'message' => 'Update Succes',
-                'data' => $user
-            ],200);
+                'message' => 'Data User Tidak / Ada Bermasalah',
+                 'succes'=>false
+            ], 404);
         }
-
-
-
-
-
+        $user->update($request->only(['alamat']));
+        return response()->json([
+            'message' => 'Data Berhasil Iinput',
+            'data' => $user,
+            'succes'=>true
+        ], 200);
     }
 
     public function delete($id){
