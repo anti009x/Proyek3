@@ -77,7 +77,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         //Akun Konsumen
         Route::get("/logout",[UserController::class,"logout"]);
-        Route::put("/userupdate/{id}", [UserController::class, "update"]);
+        Route::put("/userupdate", [UserController::class, "update"]);
         Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
         Route::get("/datauser",[UserController::class,"index"]);
 

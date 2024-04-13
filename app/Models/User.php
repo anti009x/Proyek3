@@ -20,7 +20,8 @@ class User extends Authenticatable
         'nohp',
         'password',
         'Nama_Kurir', // Rubah Nama_Kurir -<Valid coy
-        'role_id'
+        'role_id',
+        'alamat'
     ];
 
     public function InputPesanan()
