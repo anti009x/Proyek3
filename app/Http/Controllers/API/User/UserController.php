@@ -90,13 +90,20 @@ class UserController extends Controller
     }
 
 
-    public function index(){
-        $user = User::all();
-        return response()->json([
-            'message' => $user
-        ]);
+    public function index(Request $request){
+        $user = $request->user();
+        if ($user){
+            return response()->json([
+                'message' => true,
+                'data' => $user
+            ],200);
+        }else{
+            return response()->json([
+                'message' => false,
+                'data' => 'Data User Tidak Ditemukan',
+            ],404);
+        }
     }
-
     public function update(Request $request ,$id)
     {
         $user = Auth::user();
