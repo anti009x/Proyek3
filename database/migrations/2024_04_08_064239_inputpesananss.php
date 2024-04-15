@@ -20,6 +20,10 @@ return new class extends Migration
             $table->integer('Harga_Paket');
             $table->string('Nama_Kurir');
             $table->string('status')->default('Belum Dibayar');
+            $table->string('paket')->default('NULL');
+            $table->string( 'paket_sekarang')->default('NULL');
+            $table->string('penerimaan_paket')->default('NULL');
+
 
 
 

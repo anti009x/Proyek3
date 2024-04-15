@@ -55,6 +55,9 @@ class InputPesananController extends Controller
             'Harga_Paket'=>'required',
             'Nama_Kurir'=>'required',
             'status',
+            'paket',
+            'paket_sekarang',
+            'penerimaan_paket',
         ]);
 
         $validatedData['nama'] = $user->nama;
@@ -86,10 +89,15 @@ class InputPesananController extends Controller
         }
 
         $request->validate([
-            'status' => 'required'
+            'status',
+            'paket',
+            #kurir
+            'paket_sekarang',
+            'Alamat_Tujuan',
+            'penerimaan_paket',
         ]);
 
-        $inputPesanan->update($request->only(['status']));
+        $inputPesanan->update($request->only(['status','paket', 'paket_sekarang','Alamat_Tujuan','penerimaan_paket']));
         return response()->json([
             'message' => 'Data Berhasil Diupdate',
             'data' => $inputPesanan,
