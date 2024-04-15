@@ -104,6 +104,21 @@ class UserController extends Controller
             ],404);
         }
     }
+
+    public function datasemuauser(){
+        $user = User::all();
+        if ($user){
+            return response()->json([
+                'message' => true,
+                'data' => $user
+            ],200);
+        }else{
+            return response()->json([
+                'message' => false,
+                'data' => 'Data User Tidak Ditemukan',
+            ],404);
+        }
+    }
     public function update(Request $request)
     {
         $user = $request->user();
