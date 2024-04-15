@@ -18,7 +18,12 @@ class InputPesanan extends Model
         'Nama_Paket',
         'Harga_Paket',
         'Nama_Kurir',
-        'status'
+        'status',
+        'paket',
+        'paket_sekarang',
+        'penerimaan_paket',
+
+
     ];
 
     public function user()
