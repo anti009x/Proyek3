@@ -54,6 +54,7 @@ class InputPesananController extends Controller
             'Nama_Paket'=>'required',
             'Harga_Paket'=>'required',
             'Nama_Kurir'=>'required',
+            'status',
         ]);
 
         $validatedData['nama'] = $user->nama;
@@ -75,18 +76,25 @@ class InputPesananController extends Controller
 
     public function update(Request $request, $id)
     {
+        $inputPesanan = InputPesanan::find($id);
+
+        if (!$inputPesanan) {
+            return response()->json([
+                'message' => 'Pesanan tidak ditemukan',
+                'success' => false
+            ], 404);
+        }
+
         $request->validate([
-            'Nama_Barang'=>'required',
-            'Alamat_Tujuan'=>'required',
-            'Nama_Paket'=>'required',
-            'Harga_Paket'=>'required',
-            'Nama_Kurir'=>'required',
+            'status' => 'required'
         ]);
 
-        $inputPesanan = InputPesanan::findOrFail($id);
-        $inputPesanan->update($request->all());
-
-        return response()->json(['message' => 'Data Berhasil Di Ubah', 'Data' => $id, $inputPesanan], 200);
+        $inputPesanan->update($request->only(['status']));
+        return response()->json([
+            'message' => 'Data Berhasil Diupdate',
+            'data' => $inputPesanan,
+            'success' => true
+        ], 200);
     }
 
     public function destroy($id)
