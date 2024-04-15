@@ -18,6 +18,7 @@ class InputPesanan extends Model
         'Nama_Paket',
         'Harga_Paket',
         'Nama_Kurir',
+        'status'
     ];
 
     public function user()

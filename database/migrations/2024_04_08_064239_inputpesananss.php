@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('Nama_Paket');
             $table->integer('Harga_Paket');
             $table->string('Nama_Kurir');
+            $table->string('status')->default('Belum Dibayar');
 
 
 
