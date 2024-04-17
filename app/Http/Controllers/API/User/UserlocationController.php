@@ -25,10 +25,13 @@ class UserlocationController extends Controller
          
 
             return response()->json([
-                'Lokasi Anda'=>$position->countryName,
-                'Code Lokasi Anda'=>$position->countryCode,
-                'Kota Anda'=>$position->cityName,
-                'Zip Code' => $position->zipCode
+                'message' => [
+                    'data'=>true,
+                    'Lokasi_Anda'=>$position->countryName,
+                    'Code_Lokasi_Anda'=>$position->countryCode,
+                    'Kota_Anda'=>$position->cityName,
+                    'Zip_Code' => $position->zipCode
+                ]
             ]);
 
 
