@@ -19,13 +19,20 @@ return new class extends Migration
             $table->string('nama');
             $table->timestamps();
         });
-        DB::table('kurirs')->insert([
-            ['role_id' => 3 , 
-            'gaji' => 40000,
-            'nama' => 'Joko',
-            'created_at' => now(),
-            'updated_at' => now(),],
-        ]);
+        // DB::table('kurirs')->insert([
+        //     ['role_id' => 3 , 
+        //     'gaji' => 40000,
+        //     'nama' => 'Joko',
+        //     'created_at' => now(),
+        //     'updated_at' => now(),],
+        // ]);
+        // DB::table('kurirs')->insert([
+        //     ['role_id' => 3 , 
+        //     'gaji' => 50000,
+        //     'nama' => 'Soko',
+        //     'created_at' => now(),
+        //     'updated_at' => now(),],
+        // ]);
     }
     
 
