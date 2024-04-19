@@ -14,6 +14,7 @@ class InputPesanan extends Model
     protected $fillable = [
         'Nama_Barang',
         'nama',
+        'alamat',
         'Alamat_Tujuan',
         'Nama_Paket',
         'Harga_Paket',
@@ -22,6 +23,7 @@ class InputPesanan extends Model
         'paket',
         'paket_sekarang',
         'penerimaan_paket',
+
 
 
     ];

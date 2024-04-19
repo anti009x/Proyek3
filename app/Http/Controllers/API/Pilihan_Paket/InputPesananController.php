@@ -58,9 +58,11 @@ class InputPesananController extends Controller
             'paket',
             'paket_sekarang',
             'penerimaan_paket',
+            'alamat'
         ]);
 
         $validatedData['nama'] = $user->nama;
+        $validatedData['alamat'] = $user->alamat;
         $inputPesanan = InputPesanan::create($validatedData);
 
         // Load data kurir terkait dengan pesanan yang baru dibuat
