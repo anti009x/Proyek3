@@ -11,36 +11,25 @@ class UserlocationController extends Controller
 
     
 
-    public function lokasi () {
-
-
-
-        if ($position = Location::get()) {
-            // Successfully retrieved position.
-            $position = Location::get('http://192.168.100.56:8888');
-            // echo $position;
-
-            // $lokasi = "Indramayu";
-
-         
-
+    public function lokasi(Request $request) {
+        // $ipAddress = $request->ip();
+        $position = Location::get('https://'.$request->ip());
+        //dd($ipAddress)
+        if ($position) {
             return response()->json([
                 'message' => [
                     'data'=>true,
                     'Lokasi_Anda'=>$position->countryName,
                     'Code_Lokasi_Anda'=>$position->countryCode,
                     'Kota_Anda'=>$position->cityName,
-                    'Zip_Code' => $position->zipCode
+                    'Zip_Code' => $position->zipCode,
+                    'longitude'  => $position -> longitude,
+                    'latitude' => $position  ->  latitude 
                 ]
             ]);
-
-
-
         } else {
-            // Failed retrieving position.
-            echo("Data Not Found");
+            return response()->json(['error' => 'Lokasi Tidak Ditemukan'], 404);
         }
-
     }
 
 

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Database\Seeders\Autentikasi\User;
+use Database\Seeders\Kurir\Kurir;
 use Database\Seeders\PilihanPaket\PilihanPaket;
 use Database\Seeders\Rating\Rating;
 use Database\Seeders\Role\Role;
@@ -37,5 +38,8 @@ class DatabaseSeeder extends Seeder
         // $this->call([
         //     Role::class,
         // ]);
+        $this->call([
+            Kurir::class,
+        ]);
     }
 }

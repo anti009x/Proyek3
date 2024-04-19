@@ -28,6 +28,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(InputPesanan::class, 'nama', 'nama');
     }
+
+    
     public function isActive()
     {
         return $this->active; 
