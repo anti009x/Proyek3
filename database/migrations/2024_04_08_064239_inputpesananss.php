@@ -16,7 +16,11 @@ return new class extends Migration
             $table->string('Nama_Barang');
             $table->string('nama');
             $table->string('alamat');
-            $table->string('Alamat_Tujuan');
+
+            // $table->string('Alamat_Tujuan');
+            $table->string('province');
+            $table->string('city');
+            $table->integer('kode_pos');
             $table->string('Nama_Paket');
             $table->integer('Harga_Paket');
             $table->string('Nama_Kurir');
@@ -25,9 +29,6 @@ return new class extends Migration
             $table->string( 'paket_sekarang')->default('NULL');
             $table->string('penerimaan_paket')->default('NULL');
             $table->string('Angkutan');
-
-
-
 
             $table->timestamps();
         });

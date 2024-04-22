@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Pesan\PesanController;
 use App\Http\Controllers\API\Pesan\RatingController;
 use App\Http\Controllers\Api\Pilihan_Paket\InputPesananController;
 use App\Http\Controllers\API\Pilihan_Paket\PilihanPaketController;
+use App\Http\Controllers\API\Pilihan_Paket\RajaOngkirController;
 use App\Http\Controllers\API\User\PembayaranController;
 use App\Http\Controllers\API\User\UserController;
 use App\Http\Controllers\API\User\UserlocationController;
@@ -55,6 +56,13 @@ Route::post("/login", [UserController::class, "login"]);
 
 
 Route::get("/lokasi",[UserlocationController::class,"lokasi"]);
+
+//Raja Ongkir
+
+Route::get("/city",[RajaOngkirController::class,"city"]);
+Route::get("/province",[RajaOngkirController::class,"province"]);
+// Route::get("/city",[RajaOngkirController::class,"pilihanalamat"]);
+// Route::get("/city",[RajaOngkirController::class,"pilihanalamat"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/detailuserlogin', function (Request $request) {

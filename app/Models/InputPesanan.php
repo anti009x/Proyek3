@@ -15,7 +15,7 @@ class InputPesanan extends Model
         'Nama_Barang',
         'nama',
         'alamat',
-        'Alamat_Tujuan',
+        // 'Alamat_Tujuan',
         'Nama_Paket',
         'Harga_Paket',
         'Nama_Kurir',
@@ -23,8 +23,11 @@ class InputPesanan extends Model
         'paket',
         'paket_sekarang',
         'penerimaan_paket',
-        'Angkutan'
-        
+        'Angkutan',
+        'province',
+        'city',
+        'kode_pos',
+                
 
 
 
