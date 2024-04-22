@@ -50,7 +50,7 @@ class InputPesananController extends Controller
         $user = Auth::user();
         $validatedData = $request->validate([
             'Nama_Barang'=>'required',
-            'Alamat_Tujuan'=>'required',
+            // 'Alamat_Tujuan'=>'required',
             'Nama_Paket'=>'required',
             'Harga_Paket'=>'required',
             'Nama_Kurir'=>'required',
@@ -58,7 +58,12 @@ class InputPesananController extends Controller
             'paket',
             'paket_sekarang',
             'penerimaan_paket',
-            'alamat'
+            'alamat',
+            'Angkutan'=>'required',
+            'province'=>'required',
+            'city'=>'required',
+            'kode_pos'=>'required',
+                    
         ]);
 
         $validatedData['nama'] = $user->nama;
