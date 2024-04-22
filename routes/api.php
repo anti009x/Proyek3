@@ -57,12 +57,7 @@ Route::post("/login", [UserController::class, "login"]);
 
 Route::get("/lokasi",[UserlocationController::class,"lokasi"]);
 
-//Raja Ongkir
 
-Route::get("/city",[RajaOngkirController::class,"city"]);
-Route::get("/province",[RajaOngkirController::class,"province"]);
-// Route::get("/city",[RajaOngkirController::class,"pilihanalamat"]);
-// Route::get("/city",[RajaOngkirController::class,"pilihanalamat"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/detailuserlogin', function (Request $request) {
@@ -95,6 +90,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post("/rating",[RatingController::class,"store"]);
 
         Route::get("/data_rating",[RatingController::class,"index"]);
+
+        //Raja Ongkir
+
+Route::get("/city",[RajaOngkirController::class,"city"]);
+Route::get("/province",[RajaOngkirController::class,"province"]);
+// Route::get("/city",[RajaOngkirController::class,"pilihanalamat"]);
+// Route::get("/city",[RajaOngkirController::class,"pilihanalamat"]);
     
 
 });
