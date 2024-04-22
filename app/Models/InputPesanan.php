@@ -23,6 +23,8 @@ class InputPesanan extends Model
         'paket',
         'paket_sekarang',
         'penerimaan_paket',
+        'Angkutan'
+        
 
 
 

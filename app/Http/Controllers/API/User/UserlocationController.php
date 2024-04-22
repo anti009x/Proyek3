@@ -24,7 +24,8 @@ class UserlocationController extends Controller
                     'Kota_Anda'=>$position->cityName,
                     'Zip_Code' => $position->zipCode,
                     'longitude'  => $position -> longitude,
-                    'latitude' => $position  ->  latitude 
+                    'latitude' => $position  ->  latitude ,
+                    // 'Area'=>$position ->areaCode
                 ]
             ]);
         } else {

@@ -58,7 +58,8 @@ class InputPesananController extends Controller
             'paket',
             'paket_sekarang',
             'penerimaan_paket',
-            'alamat'
+            'alamat',
+            'Angkutan'=>'required',
         ]);
 
         $validatedData['nama'] = $user->nama;

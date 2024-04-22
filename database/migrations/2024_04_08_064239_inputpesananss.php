@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('paket')->default('NULL');
             $table->string( 'paket_sekarang')->default('NULL');
             $table->string('penerimaan_paket')->default('NULL');
+            $table->string('Angkutan');
 
 
 
