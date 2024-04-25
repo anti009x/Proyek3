@@ -6,7 +6,7 @@ use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
 use App\Http\Controllers\API\Kurir\KurirController;
 use App\Http\Controllers\API\Pesan\PesanController;
 use App\Http\Controllers\API\Pesan\RatingController;
-use App\Http\Controllers\Api\Pilihan_Paket\InputPesananController;
+use App\Http\Controllers\API\Pilihan_Paket\InputPesananController;
 use App\Http\Controllers\API\Pilihan_Paket\PilihanPaketController;
 use App\Http\Controllers\API\Pilihan_Paket\RajaOngkirController;
 use App\Http\Controllers\API\User\PembayaranController;
