@@ -25,8 +25,9 @@ class InputPesanan extends Model
         'penerimaan_paket',
         'Angkutan',
         'province',
-        'city',
-        'kode_pos',
+        'city_name',
+        'postal_code',
+        'DetailAlamat'
                 
 
 

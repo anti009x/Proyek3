@@ -19,8 +19,8 @@ return new class extends Migration
 
             // $table->string('Alamat_Tujuan');
             $table->string('province');
-            $table->string('city');
-            $table->integer('kode_pos');
+            $table->string('city_name');
+            $table->integer('postal_code');
             $table->string('Nama_Paket');
             $table->integer('Harga_Paket');
             $table->string('Nama_Kurir');
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string( 'paket_sekarang')->default('NULL');
             $table->string('penerimaan_paket')->default('NULL');
             $table->string('Angkutan');
+            $table->string('DetailAlamat');
 
             $table->timestamps();
         });
