@@ -17,7 +17,7 @@ class UserlocationController extends Controller
 
         if ($position = Location::get()) {
             // Successfully retrieved position.
-            $position = Location::get('http://192.168.100.56:8888');
+            $position = Location::get('http://192.168.137.129:8888/');
             // echo $position;
 
             // $lokasi = "Indramayu";
