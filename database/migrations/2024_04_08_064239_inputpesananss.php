@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('penerimaan_paket')->default('NULL');
             $table->string('Angkutan');
             $table->string('DetailAlamat');
+            $table->integer('Lebar_cm')->default(0);
+            $table->integer('Tinggi_cm')->default(0);
 
             $table->timestamps();
         });

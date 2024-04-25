@@ -27,7 +27,9 @@ class InputPesanan extends Model
         'province',
         'city_name',
         'postal_code',
-        'DetailAlamat'
+        'DetailAlamat',
+        'Lebar_cm',
+        'Tinggi_cm',
                 
 
 
