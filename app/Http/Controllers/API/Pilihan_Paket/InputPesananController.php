@@ -63,7 +63,9 @@ class InputPesananController extends Controller
             'province'=>'required',
             'city_name'=>'required',
             'postal_code'=>'required',
-            'DetailAlamat'=>'required'
+            'DetailAlamat'=>'required',
+            'Lebar_cm',
+            'Tinggi_cm',
                     
         ]);
 
