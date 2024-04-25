@@ -11,6 +11,7 @@ class UserlocationController extends Controller
 
     
 
+<<<<<<< HEAD
     public function lokasi () {
 
 
@@ -24,23 +25,28 @@ class UserlocationController extends Controller
 
          
 
+=======
+    public function lokasi(Request $request) {
+        // $ipAddress = $request->ip();
+        $position = Location::get('https://'.$request->ip());
+        //dd($ipAddress)
+        if ($position) {
+>>>>>>> 7664ea6a1c202cf41bc05c2cb7a50cce9803a937
             return response()->json([
                 'message' => [
                     'data'=>true,
                     'Lokasi_Anda'=>$position->countryName,
                     'Code_Lokasi_Anda'=>$position->countryCode,
                     'Kota_Anda'=>$position->cityName,
-                    'Zip_Code' => $position->zipCode
+                    'Zip_Code' => $position->zipCode,
+                    'longitude'  => $position -> longitude,
+                    'latitude' => $position  ->  latitude ,
+                    // 'Area'=>$position ->areaCode
                 ]
             ]);
-
-
-
         } else {
-            // Failed retrieving position.
-            echo("Data Not Found");
+            return response()->json(['error' => 'Lokasi Tidak Ditemukan'], 404);
         }
-
     }
 
 
