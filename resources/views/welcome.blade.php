@@ -15,7 +15,7 @@
            body{
             background-image: url('{{ asset('img/boy.jpg') }}');
             background-size: cover;
-            background-repeat: no-repeat;
+            /* background-repeat: no-repeat; */
             font-family: Arial, Helvetica, sans-serif;
             margin-top: 20px;
             color: white;
