@@ -61,8 +61,11 @@ class InputPesananController extends Controller
             'alamat',
             'Angkutan'=>'required',
             'province'=>'required',
-            'city'=>'required',
-            'kode_pos'=>'required',
+            'city_name'=>'required',
+            'postal_code'=>'required',
+            'DetailAlamat'=>'required',
+            'Lebar_cm'=>'required',
+            'Tinggi_cm'=>'required',
                     
         ]);
 
