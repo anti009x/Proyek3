@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Diagnosa\DiagnosaController;
 use App\Http\Controllers\API\Diagnosa\DianosaController;
 use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
 use App\Http\Controllers\API\Kurir\KurirController;
+use App\Http\Controllers\API\Pembayaran\MidtransController;
 use App\Http\Controllers\API\Pesan\PesanController;
 use App\Http\Controllers\API\Pesan\RatingController;
 use App\Http\Controllers\API\Pilihan_Paket\InputPesananController;
@@ -40,6 +41,10 @@ use Illuminate\Support\Facades\Route;
 //Midtrans
 Route::post('/payment', [PembayaranController::class, 'pay']); #->name('donation.pay'); -- route sebelumnya woy !! janagn pake itu
 Route::get('/payment',[PembayaranController::class,'index']);
+
+Route::post('/topup',[MidtransController::class,'create']);
+Route::post('/aftherpay',[MidtransController::class,'midtrans_hook']);
+Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
 
 ///Bug Gk Tau pusing gw kenapa ini harus disini
 Route::post("/register", [UserController::class, "register"]);

@@ -23,6 +23,15 @@ class User extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+            DB::table('userss')->insert([
+                'nama'=>'sulse',
+                'nohp'=>'0812345678901',
+                'email'=>'a@gmail.com',
+                'password'=>bcrypt(1),
+                'role_id'=>2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
             DB::table('userss')->insert([
                 'nama'=>'Soko',
