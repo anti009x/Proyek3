@@ -48,6 +48,9 @@ class User extends Authenticatable
     public function Rating(){
         return $this->belongsTo(Rating::class,'nama','nama');
     }
+    public function Payment(){
+        return $this->belongsTo(Payment::class,'nama','nama');
+    }
     
 
 

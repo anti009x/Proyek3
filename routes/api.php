@@ -31,6 +31,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::post('/aftherpay',[MidtransController::class,'midtrans_hook']);
+Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
+
 
 //Route Taroh Disini Ya!
     //Ai / Klasifikasi
@@ -42,9 +45,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/payment', [PembayaranController::class, 'pay']); #->name('donation.pay'); -- route sebelumnya woy !! janagn pake itu
 Route::get('/payment',[PembayaranController::class,'index']);
 
-Route::post('/topup',[MidtransController::class,'create']);
-Route::post('/aftherpay',[MidtransController::class,'midtrans_hook']);
-Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
+
 
 ///Bug Gk Tau pusing gw kenapa ini harus disini
 Route::post("/register", [UserController::class, "register"]);
@@ -68,6 +69,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/detailuserlogin', function (Request $request) {
         return $request->user();
     });
+
 
 
     //Input Pesanan
@@ -97,11 +99,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get("/data_rating",[RatingController::class,"index"]);
 
         //Raja Ongkir
+        Route::get('/riwayatpembayaran',[MidtransController::class,'riwayatopup']);
+        Route::get('/riwayatpembayaran/{id}',[MidtransController::class,'riwayatopupbyid']);
 
 Route::get("/city",[RajaOngkirController::class,"city"]);
 Route::get("/province",[RajaOngkirController::class,"province"]);
 // Route::get("/city",[RajaOngkirController::class,"pilihanalamat"]);
 // Route::get("/city",[RajaOngkirController::class,"pilihanalamat"]);
-    
+
+Route::post('/topup',[MidtransController::class,'create']);
+// Route::post('/topup',[MidtransController::class,'create']);
+
+
 
 });
