@@ -11,6 +11,7 @@ class Payment extends Model
     use HasFactory;
     protected $table = 'payments';
     protected $fillable = [
+        'nama',
         'transaction_id',
         'order_id',
         'merchant_id',
@@ -20,20 +21,37 @@ class Payment extends Model
         'transaction_status',
         'bank',
         'va_number',
-        'status_message'
+        'status_message',
+        'userss_id',
+        'transaction_time',
+        'expiry_time',
     ];
+
+    public function User(){
+
+        return $this->hasMany(User::class , 'nama','nama');
+
+    }
+
+
+    
 
     public function insert_payment($data){
         self::create([
             'transaction_id' => $data['transaction_id'],
+            'nama'=> $data['nama'],
+            'userss_id'=>$data['userss_id'],
             'order_id' => $data['order_id'],
             'merchant_id' => $data['merchant_id'],
             'gross_amount' => $data['gross_amount'],
             'payment_type' => $data['payment_type'],
             'transaction_status' => $data ['transaction_status'],
-            'status_message' => $data['status_message'], // Assuming you want to store the status message here
-            'bank' => $data['va_numbers'][0]['bank'], // Accessing the first element of the va_numbers array
-            'va_number' => $data['va_numbers'][0]['va_number'], // Accessing the first element of the va_numbers array
+            'status_message' => $data['status_message'], 
+            'bank' => $data['va_numbers'][0]['bank'], 
+            'va_number' => $data['va_numbers'][0]['va_number'], 
+            'transaction_time'=>$data['transaction_time'],
+            'expiry_time'=>$data['expiry_time'],
+
         ]);
     }
 
