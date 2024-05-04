@@ -101,6 +101,8 @@ Route::middleware('auth:sanctum')->group(function () {
         //Raja Ongkir
         Route::get('/riwayatpembayaran',[MidtransController::class,'riwayatopup']);
         Route::get('/riwayatpembayaran/{id}',[MidtransController::class,'riwayatopupbyid']);
+        Route::get('/riwayatpembayaranbysaldo',[MidtransController::class,'riwayatopupbysaldo']);
+        Route::put('/udpdatesaldo',[MidtransController::class,'updatesaldo']);
 
 Route::get("/city",[RajaOngkirController::class,"city"]);
 Route::get("/province",[RajaOngkirController::class,"province"]);

@@ -72,7 +72,88 @@ class MidtransController extends Controller
         } else {
             return response()->json([
                 'message' => false,
-                'data' => 'You do not have any payment history.',
+                'data' => 'tidak ada history transaksi',
+            ]);
+        }
+    }
+
+    public function riwayatopupbysaldo(){
+        $user = Auth::user();
+        if($user){
+            $total_amount = $this->model::where('userss_id', $user->id)
+                                        ->where('transaction_status', '!=', 'pending')
+                                        ->sum('gross_amount');
+
+            return response()->json([
+                'message' => true,
+                'data' => [
+                    'gross_amount' => $total_amount,
+                ],
+            ]);
+        } else {
+            return response()->json([
+                'message' => false,
+                'data' => 'tidak ada history transaksi',
+            ]);
+        }
+    }
+
+    public function updatesaldo(Request $request){
+        $user = Auth::user();
+        if($user){
+            $request->validate([
+                'gross_amount' => 'required|numeric'
+            ]);
+    
+         
+            $transactions = $this->model::where('userss_id', $user->id)
+                                        ->where('transaction_status', '!=', 'pending')
+                                        ->get();
+    
+            if($transactions->isEmpty()) {
+                return response()->json([
+                    'message' => false,
+                    'data' => 'tidak ada history transaksi',
+                ]);
+            }
+    
+            $remaining_amount = $request->gross_amount;
+            $total_deducted = 0;
+
+            foreach ($transactions as $transaction) {
+                if ($remaining_amount <= 0) break;
+    
+                $current_amount = $transaction->gross_amount;
+                if ($current_amount >= $remaining_amount) {
+                    $transaction->update(['gross_amount' => $current_amount - $remaining_amount]);
+                    $total_deducted += $remaining_amount;
+                    $remaining_amount = 0;
+                } else {
+                    $transaction->update(['gross_amount' => 0]);
+                    $remaining_amount -= $current_amount;
+                    $total_deducted += $current_amount;
+                }
+            }
+
+            if ($total_deducted == 0 && $request->gross_amount > 0) {
+                return response()->json([
+                    'message' => false,
+                    'data' => 'saldo tidak cukup',
+                ]);
+            }
+    
+            $riwayatopupbysaldoResponse = $this->riwayatopupbysaldo();
+            $total_amount = json_decode($riwayatopupbysaldoResponse->getContent(), true)['data']['gross_amount'];
+            return response()->json([
+                'message' => true,
+                'data' => [
+                    'remaining_amount' => $total_amount - $total_deducted,
+                ],
+            ]);
+        } else {
+            return response()->json([
+                'message' => false,
+                'data' => 'tidak ada history transaksi',
             ]);
         }
     }
@@ -90,10 +171,11 @@ class MidtransController extends Controller
         } else {
             return response()->json([
                 'message' => false,
-                'data' => 'You do not have any payment history.',
+                'data' => 'tidak ada history transaksi',
             ]);
         }
     }
+    
     public function midtrans_hook(Request $request){
         $result = file_get_contents('php://input');
         $data = json_decode($result,true);
