@@ -105,56 +105,43 @@ class MidtransController extends Controller
                 'gross_amount' => 'required|numeric'
             ]);
     
-         
             $transactions = $this->model::where('userss_id', $user->id)
                                         ->where('transaction_status', '!=', 'pending')
                                         ->get();
     
-            if($transactions->isEmpty()) {
-                return response()->json([
-                    'message' => false,
-                    'data' => 'tidak ada history transaksi',
-                ]);
-            }
-    
-            $remaining_amount = $request->gross_amount;
             $total_deducted = 0;
-
+    
             foreach ($transactions as $transaction) {
-                if ($remaining_amount <= 0) break;
+                if ($request->gross_amount <= 0) break;
     
                 $current_amount = $transaction->gross_amount;
-                if ($current_amount >= $remaining_amount) {
-                    $transaction->update(['gross_amount' => $current_amount - $remaining_amount]);
-                    $total_deducted += $remaining_amount;
-                    $remaining_amount = 0;
+                if ($current_amount >= $request->gross_amount) {
+                    $transaction->update(['gross_amount' => $current_amount - $request->gross_amount]);
+                    $total_deducted += $request->gross_amount;
+                    $request->gross_amount = 0;
                 } else {
                     $transaction->update(['gross_amount' => 0]);
-                    $remaining_amount -= $current_amount;
+                    $request->gross_amount -= $current_amount;
                     $total_deducted += $current_amount;
                 }
             }
-
-            if ($total_deducted == 0 && $request->gross_amount > 0) {
+    
+            if ($request->gross_amount > 0) {
                 return response()->json([
-                    'message' => false,
-                    'data' => 'saldo tidak cukup',
-                ]);
+                    'message' => 'Saldo tidak cukup',
+                ], 400);
             }
     
-            $riwayatopupbysaldoResponse = $this->riwayatopupbysaldo();
-            $total_amount = json_decode($riwayatopupbysaldoResponse->getContent(), true)['data']['gross_amount'];
             return response()->json([
-                'message' => true,
+                'message' => 'Saldo berhasil diperbarui',
                 'data' => [
-                    'remaining_amount' => $total_amount - $total_deducted,
+                    'gross_amount' => $user->saldo - $total_deducted,
                 ],
             ]);
         } else {
             return response()->json([
-                'message' => false,
-                'data' => 'tidak ada history transaksi',
-            ]);
+                'message' => 'Tidak ada history transaksi',
+            ], 404);
         }
     }
 
