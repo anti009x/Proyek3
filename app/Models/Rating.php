@@ -13,8 +13,8 @@ class Rating extends Model
 
     protected $fillable = [
         'rating',
-        'saran',
-        'nama'
+        'nama',
+        'komentar'
     ];
     public function User(){
 

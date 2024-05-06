@@ -14,30 +14,46 @@ class RatingController extends Controller
         $user = Auth::user();
 
         $validatedData = $request->validate([
-            'nama',
-            'rating'=>'required',
-            'saran'=>'required',
-
+            'rating' => 'required|integer|min:1|max:5',
+            'komentar' => 'nullable|string',
         ]);
 
-        
-        $validatedData['nama'] = $user->nama;
-        $rating = Rating::create($validatedData);
+        $ratingValue = $validatedData['rating'];
+        $saran = $validatedData['komentar'] ?? '';
 
-        if($rating){
-        return response()->json([
-            'message'=>true,
-            'Data Yang Terkirim adalah' => $rating
-        ]);
-
-        }else{
-            return response()->json([
-                'message'=>false,                
-            ]);
+        switch ($ratingValue) {
+            case 1:
+                $saran = 'Terlalu Kurang';
+                break;
+            case 2:
+                $saran = 'Kurang';
+                break;
+            case 3:
+                $saran = 'Cukup';
+                break;
+            case 4:
+                $saran = 'Bagus';
+                break;
+            case 5:
+                $saran = 'Sangat Bagus';
+                break;
         }
 
+        $validatedData['nama'] = $user->nama;
+        $validatedData['komentar'] = $saran;
+        $rating = Rating::create($validatedData);
 
-
+        if ($rating) {
+            return response()->json([
+                'message' => true,
+                'Saran' => $saran,
+                'Data Berhasil Didapatkan' => $rating
+            ]);
+        } else {
+            return response()->json([
+                'message' => false,
+            ]);
+        }
     }
     public function index(){
 
