@@ -63,6 +63,7 @@ class UserController extends Controller
             $tokenResult = $auth->createToken('auth_token');
             $success['token'] = $tokenResult->plainTextToken; 
             $success['nama'] = $auth->nama;
+            $success['role_id'] = $auth->role_id;
 
             return response()->json([
                 'success' => true,
