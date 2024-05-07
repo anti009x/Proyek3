@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Diagnosa\DianosaController;
 use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
 use App\Http\Controllers\API\Kurir\KurirController;
 use App\Http\Controllers\API\Pembayaran\MidtransController;
+use App\Http\Controllers\API\Pengumuman\PengumumangController;
 use App\Http\Controllers\API\Pesan\PesanController;
 use App\Http\Controllers\API\Pesan\RatingController;
 use App\Http\Controllers\API\Pilihan_Paket\InputPesananController;
@@ -97,6 +98,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post("/rating",[RatingController::class,"store"]);
 
         Route::get("/data_rating",[RatingController::class,"index"]);
+        Route::post("/pengumuman",[PengumumangController::class,"store"]);
+        Route::get("/infopengumuman",[PengumumangController::class,"index"]);
 
         //Raja Ongkir
         Route::get('/riwayatpembayaran',[MidtransController::class,'riwayatopup']);
