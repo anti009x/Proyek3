@@ -52,6 +52,15 @@ class User extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+            DB::table('userss')->insert([
+                'nama'=>'albert',
+                'nohp'=>'081234567890',
+                'email'=>'b@gmail.com',
+                'password'=>bcrypt(1),
+                'role_id'=>3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
     }
 }
