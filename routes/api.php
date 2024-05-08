@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\BeratBarang\BeratBarangController;
 use App\Http\Controllers\API\Diagnosa\DiagnosaController;
 use App\Http\Controllers\API\Diagnosa\DianosaController;
 use App\Http\Controllers\API\Diagnosa\TestDiagnosaController;
@@ -115,6 +116,8 @@ Route::get("/province",[RajaOngkirController::class,"province"]);
 Route::post('/topup',[MidtransController::class,'create']);
 // Route::post('/topup',[MidtransController::class,'create']);
 
-
+//Barang
+// Route::get("/beratbarang",[BeratBarangController::class,"index"]);
+Route::post("/beratbarang",[BeratBarangController::class,"store"]);
 
 });

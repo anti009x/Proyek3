@@ -66,6 +66,7 @@ class InputPesananController extends Controller
             'DetailAlamat'=>'required',
             'Lebar_cm'=>'required',
             'Tinggi_cm'=>'required',
+            'Berat_kg'=>'required',
                     
         ]);
 
