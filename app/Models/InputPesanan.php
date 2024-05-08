@@ -30,6 +30,7 @@ class InputPesanan extends Model
         'DetailAlamat',
         'Lebar_cm',
         'Tinggi_cm',
+        'Berat_kg',
                 
 
 
