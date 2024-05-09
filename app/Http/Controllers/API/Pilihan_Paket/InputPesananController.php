@@ -24,6 +24,61 @@ class InputPesananController extends Controller
             return response()->json(['message' => false]);
         }
     }
+
+
+    public function allriwayatpesanan()
+    {
+
+        $riwayat = InputPesanan::all();
+
+        return response()->json([
+            'message' => 'Data Berhasil Ditampilkan',
+            'data' => $riwayat
+        ], 200);
+    }
+
+    
+    public function allriwayatpesananbyuser($id)
+    {
+        $riwayat = InputPesanan::with('pilihanPaketByNama', 'pilihanPaketByHarga', 'kurir')
+                                    ->where('id', $id)
+                                    ->first();
+
+        if (!$riwayat) {
+            return response()->json(['message' => 'Pesanan tidak ditemukan'], 404);
+        }
+
+        return response()->json($riwayat);
+    }
+
+    public function allriwayatpesananbyuserupdate(Request $request, $id)
+    {
+        $riwayat = InputPesanan::find($id);
+
+        if (!$riwayat) {
+            return response()->json([
+                'message' => 'Pesanan tidak ditemukan',
+                'success' => false
+            ], 404);
+        }
+
+        $request->validate([
+            'status',
+            'paket',
+            #kurir
+            'paket_sekarang',
+            'Alamat_Tujuan',
+            'penerimaan_paket',
+        ]);
+
+        $riwayat->update($request->only(['status','paket', 'paket_sekarang','Alamat_Tujuan','penerimaan_paket']));
+        return response()->json([
+            'message' => 'Data Berhasil Diupdate',
+            'data' => $riwayat,
+            'success' => true
+        ], 200);
+    }
+
     public function riwayatpesananbyid($id)
     {   
         $user = Auth::user();

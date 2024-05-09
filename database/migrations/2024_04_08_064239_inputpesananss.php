@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('DetailAlamat');
             $table->integer('Lebar_cm');
             $table->integer('Tinggi_cm');
-            $table->integer('Berat_kg');
+            $table->string('Berat_kg');
 
             $table->timestamps();
         });

@@ -81,6 +81,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("/inputpesanan", [InputPesananController::class, "store"]);
     Route::put("/inputpesanan/{id}", [InputPesananController::class, "update"]);
     Route::delete("/inputpesanan/{id}", [InputPesananController::class, "destroy"]);
+    Route::get("/riwayatpesananuser", [InputPesananController::class, "allriwayatpesanan"]);
+    Route::get("/riwayatpesananuser/{id}", [InputPesananController::class, "allriwayatpesananbyuser"]);
+    Route::put("/riwayatpesananuser/{id}", [InputPesananController::class, "allriwayatpesananbyuserupdate"]);
 
     //Data Kurir
     Route::get("/kurir",[KurirController::class,"index"]);
