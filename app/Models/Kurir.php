@@ -14,6 +14,7 @@ class Kurir extends Model
         'role_id',
         'gaji',
         'nama',
+        'nohp',
     ];
 
     public function user()

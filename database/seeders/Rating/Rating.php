@@ -13,12 +13,41 @@ class Rating extends Seeder
      */
     public function run(): void
     {
-        // DB::table('ratings')->insert([
-        //     'rating'=>'Lumayan',
-        //     'saran'=>'Saya sangat suka',
-        //     'nama'=>'Sule',
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('ratings')->insert([
+            'rating'=>2,
+            'komentar'=>'Kurang',
+            'nama'=>'sulse',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('ratings')->insert([
+            'rating'=>4,
+            'komentar'=>'Bagus',
+            'nama'=>'sule',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('ratings')->insert([
+            'rating'=>5,
+            'komentar'=>'Saya sangat suka',
+            'nama'=>'sulse',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('ratings')->insert([
+            'rating'=>1,
+            'komentar'=>'Terlalu Kurang',
+            'nama'=>'sule',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('ratings')->insert([
+            'rating'=>3,
+            'komentar'=>'Cukup',
+            'nama'=>'sulse',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
     }
 }

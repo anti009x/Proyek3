@@ -96,6 +96,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
         Route::get("/datauser",[UserController::class,"index"]);
         Route::get("/datakurir",[UserController::class,"datasemuauser"]);
+        Route::post("/datakurir",[KurirController::class,"store"]);
 
         //Rating
 
@@ -122,5 +123,7 @@ Route::post('/topup',[MidtransController::class,'create']);
 //Barang
 // Route::get("/beratbarang",[BeratBarangController::class,"index"]);
 Route::post("/beratbarang",[BeratBarangController::class,"store"]);
+
+
 
 });

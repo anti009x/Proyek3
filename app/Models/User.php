@@ -14,7 +14,7 @@ class User extends Authenticatable
     protected $table='userss';
 
     protected $fillable = [
-        // 'id',
+        'id',
         'nama',
         'email',
         'nohp',
@@ -23,6 +23,8 @@ class User extends Authenticatable
         'role_id',
         'alamat'
     ];
+
+
 
     public function InputPesanan()
     {
