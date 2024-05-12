@@ -29,6 +29,14 @@ class Kurir extends Seeder
             'updated_at' => now(),
         ]);
 
+        DB::table('kurirs')->insert([
+            'role_id' => 3 , 
+            'gaji' => 40000,
+            'nama' => 'albert',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         
     }
     

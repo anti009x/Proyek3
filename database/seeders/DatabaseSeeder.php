@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\Autentikasi\User;
 use Database\Seeders\Kurir\Kurir;
+use Database\Seeders\Pengumuman\Pengumuman;
 use Database\Seeders\PilihanPaket\PilihanPaket;
 use Database\Seeders\Rating\Rating;
 use Database\Seeders\Role\Role;
@@ -40,6 +41,9 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             Kurir::class,
+        ]);
+        $this->call([
+            Pengumuman::class,
         ]);
     }
 }

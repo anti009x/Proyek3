@@ -54,7 +54,7 @@ class User extends Seeder
             ]);
             DB::table('userss')->insert([
                 'nama'=>'albert',
-                'nohp'=>'081234567890',
+                'nohp'=>'0895806770203',
                 'email'=>'b@gmail.com',
                 'password'=>bcrypt(1),
                 'role_id'=>3,
