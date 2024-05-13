@@ -56,12 +56,7 @@ class Payment extends Model
     }
 
     public function update_payment($data){
-        $status = "";
-        if ($data['transaction_status'] == 'settlement' || $data['transaction_status'] == 'capture') {
-            $status = 'Sukses';
-        } else {
-            $status = $data['transaction_status'];
-        }
+        $status = $data['transaction_status'] === 'settlement' || $data['transaction_status'] === 'capture' ? 'Sukses' : $data['transaction_status'];
         self::where('order_id', $data['order_id'])->update([
             'transaction_status' => $status
         ]);
