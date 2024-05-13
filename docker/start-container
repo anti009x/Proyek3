@@ -8,6 +8,7 @@ if [ ! -d /.composer ]; then
     mkdir /.composer
 fi
 
+npm install -g npm@10.7.0
 npm install
 composer install
 php artisan migrate
