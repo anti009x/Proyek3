@@ -164,24 +164,17 @@ class MidtransController extends Controller
     }
     
     public function afterpay(Request $request){
-        try {
-            $result = file_get_contents('php://input');
-            $data = json_decode($result, true);
-            if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
-                throw new \Exception("Invalid JSON data.");
-            }
-            $this->model->update_payment($data);
-            return response()->json([
-                'message' => true,
-                'data' => $data,
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => false,
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+        $result = file_get_contents('php://input');
+        $data = json_decode($result,true);
+        $this->model->update_payment($data);
+        return response()->json([
+            'message' => true,
+            'data'=>$data,
+        ]);
+
+
     }
+
     // public function aftherpay(Request $request){
     //     $serverKey = config('midtrans.server_key');
     //     $hashed = hash ("")
