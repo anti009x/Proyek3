@@ -58,5 +58,6 @@ RUN chmod -R 775 bootstrap/cache
 RUN cp .env.example .env
 RUN composer install --no-interaction --no-plugins --no-scripts --prefer-dist
 RUN php artisan package:discover --ansi
+RUN chmod +x /var/www/html/artisan # Ensure artisan is executable
 CMD ["php", "/var/www/html/artisan", "serve", "--host=0.0.0.0", "--port=80"]
 ENTRYPOINT ["/usr/local/bin/start-container"]
