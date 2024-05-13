@@ -58,4 +58,4 @@ RUN cp .env.example .env
 RUN composer install --no-interaction --no-plugins --no-scripts --prefer-dist
 RUN php artisan package:discover --ansi
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
-ENTRYPOINT ["start-container"]
+ENTRYPOINT ["/usr/local/bin/start-container"]
