@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Update user 'sail' UID if WWWUSER is set
+if [ -n "$WWWUSER" ]; then
+    usermod -u $WWWUSER sail
+fi
+
+# Create composer directory if it does not exist
+if [ ! -d /.composer ]; then
+    mkdir /.composer
+fi
+
+# Install npm and composer dependencies, run migrations, and set permissions
+npm install
+composer install
+php artisan migrate
+chmod -R ugo+rw /.composer
+
+# Update the port in supervisord configuration if PORT is set
+if [ -n "$PORT" ]; then
+    sed -i -e "s/--port=80/--port=$PORT/g" /etc/supervisor/conf.d/supervisord.conf
+fi
+
+# Generate a new application key if it does not exist
+if ! grep -q "APP_KEY=base64" .env; then
+    php artisan key:generate
+fi
+
+# Execute command with gosu if arguments are provided, otherwise start supervisord
+if [ $# -gt 0 ]; then
+    exec gosu $WWWUSER "$@"
+else
+    /usr/bin/supervisord
+fi
