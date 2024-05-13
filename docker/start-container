@@ -11,7 +11,7 @@ if [ ! -d /.composer ]; then
 fi
 
 # Install npm and composer dependencies, run migrations, and set permissions
-npm install
+npm install --engine-strict
 composer install --ignore-platform-reqs
 php artisan migrate --force
 
