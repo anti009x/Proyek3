@@ -1,29 +1,61 @@
-FROM webdevops/php-nginx:7.4-alpine
-# Install Laravel framework system requirements (https://laravel.com/docs/8.x/deployment#optimizing-configuration-loading)
-RUN apk add oniguruma-dev postgresql-dev libxml2-dev
-RUN docker-php-ext-install \
-        bcmath \
-        ctype \
-        fileinfo \
-        json \
-        mbstring \
-        pdo_mysql \
-        pdo_pgsql \
-        tokenizer \
-        xml
-# Copy Composer binary from the Composer official Docker image
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-ENV WEB_DOCUMENT_ROOT /app/public
-ENV APP_ENV production
-WORKDIR /app
-COPY . .
-RUN composer install --no-interaction --optimize-autoloader --no-dev
-# Optimizing Configuration loading
+FROM ubuntu:20.04
+
+LABEL maintainer="Taylor Otwell"
+
+ENV WWWGROUP=1000
+
+WORKDIR /var/www/html
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update \
+    && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 \
+    && mkdir -p ~/.gnupg \
+    && chmod 600 ~/.gnupg \
+    && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
+    && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E5267A6C \
+    && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C300EE8C \
+    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
+    && apt-get update \
+    && apt-get install -y php8.0-cli php8.0-dev \
+    php8.0-pgsql php8.0-sqlite3 php8.0-gd \
+    php8.0-curl php8.0-memcached \
+    php8.0-imap php8.0-mysql php8.0-mbstring \
+    php8.0-xml php8.0-zip php8.0-bcmath php8.0-soap \
+    php8.0-intl php8.0-readline \
+    php8.0-msgpack php8.0-igbinary php8.0-ldap \
+    php8.0-redis \
+    && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
+    && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
+    && apt-get install -y nodejs \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y yarn \
+    && apt-get install -y mysql-client \
+    && apt-get -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.0
+
+RUN groupadd --force -g $WWWGROUP sail
+RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
+
+COPY docker/start-container /usr/local/bin/start-container
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/php.ini /etc/php/8.0/cli/conf.d/99-sail.ini
+RUN chmod +x /usr/local/bin/start-container
+ADD . /var/www/html
+RUN chown -R sail:www-data storage
+RUN chown -R sail:www-data bootstrap/cache
+RUN chmod -R 775 storage
+RUN chmod -R 775 bootstrap/cache
+RUN cp .env.example .env
+RUN php artisan key:generate
 RUN php artisan config:cache
-# Optimizing Route loading
-RUN php artisan route:cache
-# Optimizing View loading
-RUN php artisan view:cache
-# Start PHP built-in server
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
-RUN chown -R application:application /app
+ENTRYPOINT ["start-container"]
