@@ -55,7 +55,5 @@ RUN chown -R sail:www-data bootstrap/cache
 RUN chmod -R 775 storage
 RUN chmod -R 775 bootstrap/cache
 RUN cp .env.example .env
-# RUN php artisan key:generate
-# RUN php artisan config:cache
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
 ENTRYPOINT ["start-container"]
