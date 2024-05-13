@@ -12,8 +12,19 @@ fi
 
 # Install npm and composer dependencies, run migrations, and set permissions
 npm install
-composer install
-php artisan migrate
+composer install --ignore-platform-reqs
+php artisan migrate --force
+
+# Ensure PHP version is 8.1 or higher
+php_version=$(php -r 'echo PHP_VERSION;')
+required_version="8.1"
+if [[ "$(printf '%s\n' "$required_version" "$php_version" | sort -V | head -n1)" = "$required_version" ]]; then 
+    echo "PHP version is $php_version, which is compatible."
+else
+    echo "Error: PHP version must be at least $required_version. Current version: $php_version."
+    exit 1
+fi
+
 chmod -R ugo+rw /.composer
 
 # Update the port in supervisord configuration if PORT is set
