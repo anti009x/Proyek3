@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('/aftherpay',[MidtransController::class,'midtrans_hook']);
+Route::post('/aftherpay',[MidtransController::class,'afterpay']);
 Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
 
 
