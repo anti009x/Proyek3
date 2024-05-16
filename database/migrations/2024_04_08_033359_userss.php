@@ -16,7 +16,7 @@ return new class extends Migration
         $table->foreignId('role_id')->constrained('roles');
         $table->string('alamat')->default('NULL');
         $table->string('nama');
-        $table->bigInteger('nohp');
+        $table->string('nohp');
         $table->string('email')->unique();
   
         $table->string('password');
