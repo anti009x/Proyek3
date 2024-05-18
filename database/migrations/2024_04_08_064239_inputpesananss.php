@@ -23,7 +23,9 @@ return new class extends Migration
             $table->integer('postal_code');
             $table->string('Nama_Paket');
             $table->integer('Harga_Paket');
+             $table->foreignId('kurirs_id')->constrained('kurirs');
             $table->string('Nama_Kurir');
+            // $table->integer('kurirs_id');
             $table->string('status')->default('Belum Dibayar');
             $table->string('paket')->default('NULL');
             $table->string( 'paket_sekarang')->default('NULL');

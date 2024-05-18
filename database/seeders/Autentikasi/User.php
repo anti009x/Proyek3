@@ -39,6 +39,7 @@ class User extends Seeder
                 'email'=>'ganteng123ke2@gmail.com',
                 'password'=>bcrypt(12345),
                 'role_id'=>3,
+                'kurirs_id'=>2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -49,6 +50,7 @@ class User extends Seeder
                 'email'=>'ganteng123ke3@gmail.com',
                 'password'=>bcrypt(12345),
                 'role_id'=>3,
+                'kurirs_id'=>1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -58,6 +60,7 @@ class User extends Seeder
                 'email'=>'b@gmail.com',
                 'password'=>bcrypt(1),
                 'role_id'=>3,
+                'kurirs_id'=>3,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

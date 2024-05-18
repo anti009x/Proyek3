@@ -108,6 +108,7 @@ class InputPesananController extends Controller
             // 'Alamat_Tujuan'=>'required',
             'Nama_Paket'=>'required',
             'Harga_Paket'=>'required',
+            'kurirs_id'=>'required',
             'Nama_Kurir'=>'required',
             'status',
             'paket',

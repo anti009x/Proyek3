@@ -33,6 +33,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+//Kurir
+Route::get('/datakurir',[UserController::class,'getdatakurir']);
+Route::put('/updategajikurir/{kurirs_id}',[UserController::class,'updategajikurir']);
+
 Route::post('/aftherpay',[MidtransController::class,'afterpay']);
 Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
 
@@ -95,8 +99,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put("/userupdate", [UserController::class, "update"]);
         Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
         Route::get("/datauser",[UserController::class,"index"]);
-        Route::get("/datakurir",[UserController::class,"datasemuauser"]);
-        Route::post("/datakurir",[KurirController::class,"store"]);
+        // Route::get("/datakurir",[UserController::class,"datasemuauser"]);
+        // Route::post("/datakurir",[KurirController::class,"store"]);
 
         //Rating
 

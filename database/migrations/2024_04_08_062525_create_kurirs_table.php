@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('kurirs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->constrained('roles')->where('id', 3);
+            $table->foreignId('role_id')->constrained('roles');
             $table->integer('gaji')->default(0);
             $table->string('nama');
             $table->string('nohp')->default('62895806770203');
