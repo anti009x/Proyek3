@@ -32,6 +32,8 @@ class InputPesanan extends Model
         'Tinggi_cm',
         'Berat_kg',
         'Nama_Kurir',
+        'PerkiraanSampai',
+        'titikjemput',
                 
 
 

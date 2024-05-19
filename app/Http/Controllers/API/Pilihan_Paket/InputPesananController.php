@@ -123,7 +123,8 @@ class InputPesananController extends Controller
             'Lebar_cm'=>'required',
             'Tinggi_cm'=>'required',
             'Berat_kg'=>'required',
-                    
+            'PerkiraanSampai',
+            'titikjemput'=>'required',
         ]);
 
         $validatedData['nama'] = $user->nama;

@@ -35,8 +35,9 @@ return new class extends Migration
             $table->integer('Lebar_cm');
             $table->integer('Tinggi_cm');
             $table->string('Berat_kg');
-
             $table->timestamps();
+            $table->timestamp('PerkiraanSampai')->useCurrent();
+            $table->string('titikjemput');
         });
     }
 
