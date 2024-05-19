@@ -108,6 +108,7 @@ class InputPesananController extends Controller
             // 'Alamat_Tujuan'=>'required',
             'Nama_Paket'=>'required',
             'Harga_Paket'=>'required',
+            'kurirs_id'=>'required',
             'Nama_Kurir'=>'required',
             'status',
             'paket',
@@ -122,7 +123,8 @@ class InputPesananController extends Controller
             'Lebar_cm'=>'required',
             'Tinggi_cm'=>'required',
             'Berat_kg'=>'required',
-                    
+            'PerkiraanSampai',
+            'titikjemput'=>'required',
         ]);
 
         $validatedData['nama'] = $user->nama;

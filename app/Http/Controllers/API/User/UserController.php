@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
-
+use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {   
     use HasApiTokens;
@@ -22,6 +22,7 @@ class UserController extends Controller
             'password'=>'required',
             'role_id'=>'required',
             'alamat',
+            'gaji',
 
 
         ]);
@@ -142,6 +143,32 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function updategajikurir(Request $request, $kurirs_id){
+  
+        $user = User::where('kurirs_id', $kurirs_id)->first();
+    
+        if (!$user) {
+            return response()->json([
+                'message' => 'Kurir tidak ditemukan',
+                'success' => false
+            ], 404);
+        }
+    
+        $request->validate([
+            'gaji' => 'required|numeric', 
+        ]);
+    
+        $gaji_sekarang = $user->gaji;
+        $gaji_baru = $gaji_sekarang + $request->gaji;
+        $user->update(['gaji' => $gaji_baru]);
+    
+        return response()->json([
+            'message' => 'Data Gaji Kurir Berhasil Ditambahkan',
+            'data' => $user,
+            'success' => true
+        ], 200);
+    }
+
     public function delete($id){
         $user = User::find($id);
         if (!$user){
@@ -155,6 +182,14 @@ class UserController extends Controller
             'message' => 'Delete Success',
             'data' => $success
         ],200);          
+    }
+
+    public function getdatakurir(){
+        $kurir = User::where('role_id', 3)->get();
+        return response()->json([
+            'message' => true,
+            'data' => $kurir
+        ],200);
     }
 }
 

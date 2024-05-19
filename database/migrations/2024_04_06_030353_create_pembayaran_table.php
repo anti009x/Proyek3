@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->string('snap_token')->nullable();
             // $table->string('status')->default(null);
+     
             $table->timestamps();
         });
     }

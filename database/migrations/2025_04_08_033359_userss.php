@@ -18,6 +18,8 @@ return new class extends Migration
         $table->string('nama');
         $table->string('nohp');
         $table->string('email')->unique();
+        $table->integer('gaji')->default(0);
+        $table->foreignId('kurirs_id')->nullable()->constrained('kurirs');
   
         $table->string('password');
         $table->rememberToken();

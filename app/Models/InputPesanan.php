@@ -18,7 +18,7 @@ class InputPesanan extends Model
         // 'Alamat_Tujuan',
         'Nama_Paket',
         'Harga_Paket',
-        'Nama_Kurir',
+        'kurirs_id',
         'status',
         'paket',
         'paket_sekarang',
@@ -31,6 +31,9 @@ class InputPesanan extends Model
         'Lebar_cm',
         'Tinggi_cm',
         'Berat_kg',
+        'Nama_Kurir',
+        'PerkiraanSampai',
+        'titikjemput',
                 
 
 
@@ -55,7 +58,7 @@ class InputPesanan extends Model
     
     public function kurir()
     {
-        return $this->belongsTo(Kurir::class, 'Nama_Kurir', 'nama');
+        return $this->belongsTo(Kurir::class, 'kurirs_id', 'id');
     }
 
 }

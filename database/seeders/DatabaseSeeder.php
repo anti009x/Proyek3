@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            Kurir::class,
+        ]);
+        $this->call([
             User::class,
         ]);
         $this->call([
@@ -39,9 +42,7 @@ class DatabaseSeeder extends Seeder
         // $this->call([
         //     Role::class,
         // ]);
-        $this->call([
-            Kurir::class,
-        ]);
+      
         $this->call([
             Pengumuman::class,
         ]);

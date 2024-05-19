@@ -20,6 +20,7 @@ class Pembayaran extends Model
         'note',
         'status',
         'snap_token',
+
     ];
 
     public function InputPesanan()

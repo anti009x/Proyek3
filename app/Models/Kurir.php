@@ -24,7 +24,7 @@ class Kurir extends Model
 
     public function inputPesanan()
     {
-        return $this->hasMany(InputPesanan::class, 'Nama_Kurir', 'nama');
+        return $this->hasMany(InputPesanan::class, 'kurirs_id', 'id');
     }
 
 

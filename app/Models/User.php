@@ -19,9 +19,12 @@ class User extends Authenticatable
         'email',
         'nohp',
         'password',
-        'Nama_Kurir', // Rubah Nama_Kurir -<Valid coy
+        'Nama_Kurir',
+        'kurirs_id', // Rubah Nama_Kurir -<Valid coy
         'role_id',
-        'alamat'
+        'alamat',
+        'gaji',
+        // 'kurirs_id'
     ];
 
 
