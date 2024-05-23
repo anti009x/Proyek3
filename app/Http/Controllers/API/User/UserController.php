@@ -121,6 +121,30 @@ class UserController extends Controller
             ],404);
         }
     }
+
+    public function updatenohp(Request $request){
+        $user = $request->user();
+
+        $request->validate([
+            'nohp' => 'required',
+        ]);
+
+        if (!$user){
+            return response()->json([
+                'message' => 'Data User Tidak Ditemukan',
+                'data' => 'Data User Tidak Ditemukan',
+            ],404);
+        }
+
+        $user->update($request->only(['nohp']));
+
+        return response()->json([
+            'message' => 'Data Berhasil Diupdate',
+            'data' => $user,
+            'succes'=>true
+        ], 200);
+    }
+
     public function update(Request $request)
     {
         $user = $request->user();

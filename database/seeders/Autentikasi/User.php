@@ -35,7 +35,7 @@ class User extends Seeder
 
             DB::table('userss')->insert([
                 'nama'=>'Soko',
-                'nohp'=>'6285806770203',
+                'nohp'=>'62895806770203',
                 'email'=>'ganteng123ke2@gmail.com',
                 'password'=>bcrypt(12345),
                 'role_id'=>3,
@@ -46,7 +46,7 @@ class User extends Seeder
 
             DB::table('userss')->insert([
                 'nama'=>'Joko',
-                'nohp'=>'6285806770203',
+                'nohp'=>'62895806770203',
                 'email'=>'ganteng123ke3@gmail.com',
                 'password'=>bcrypt(12345),
                 'role_id'=>3,
@@ -56,7 +56,7 @@ class User extends Seeder
             ]);
             DB::table('userss')->insert([
                 'nama'=>'albert',
-                'nohp'=>'6285806770203',
+                'nohp'=>'62895806770203',
                 'email'=>'b@gmail.com',
                 'password'=>bcrypt(1),
                 'role_id'=>3,
@@ -67,7 +67,7 @@ class User extends Seeder
 
             DB::table('userss')->insert([
                 'nama'=>'admin',
-                'nohp'=>'6285806770203',
+                'nohp'=>'62895806770203',
                 'email'=>'c@gmail.com',
                 'password'=>bcrypt(1),
                 'role_id'=>1,

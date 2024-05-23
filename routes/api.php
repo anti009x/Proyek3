@@ -99,6 +99,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put("/userupdate", [UserController::class, "update"]);
         Route::delete("/deleteuser/{id}",[UserController::class,"delete"]);
         Route::get("/datauser",[UserController::class,"index"]);
+
+        Route::put("/updatenohp",[UserController::class,"updatenohp"]);
+
+
         // Route::get("/datakurir",[UserController::class,"datasemuauser"]);
         // Route::post("/datakurir",[KurirController::class,"store"]);
 
