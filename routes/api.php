@@ -35,10 +35,13 @@ use Illuminate\Support\Facades\Route;
 
 //Kurir
 Route::get('/datakurir',[UserController::class,'getdatakurir']);
-Route::put('/updategajikurir/{kurirs_id}',[UserController::class,'updategajikurir']);
+Route::put('/updategajikurir/{nama_kurir}',[UserController::class,'updategajikurir']);
 
 Route::post('/aftherpay',[MidtransController::class,'afterpay']);
 Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
+
+
+
 
 
 //Route Taroh Disini Ya!
@@ -88,6 +91,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/riwayatpesananuser", [InputPesananController::class, "allriwayatpesanan"]);
     Route::get("/riwayatpesananuser/{id}", [InputPesananController::class, "allriwayatpesananbyuser"]);
     Route::put("/riwayatpesananuser/{id}", [InputPesananController::class, "allriwayatpesananbyuserupdate"]);
+    Route::put('/updatestatusbykurir/{id}',[InputPesananController::class,'updatestatusbykurir']);
 
     //Data Kurir
     Route::get("/kurir",[KurirController::class,"index"]);

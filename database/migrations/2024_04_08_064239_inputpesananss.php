@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('postal_code');
             $table->string('Nama_Paket');
             $table->integer('Harga_Paket');
-             $table->foreignId('kurirs_id')->constrained('kurirs');
+            $table->foreignId('kurirs_id')->nullable()->constrained('kurirs');
             $table->string('Nama_Kurir');
             // $table->integer('kurirs_id');
             $table->string('status')->default('Belum Dibayar');
@@ -38,6 +38,7 @@ return new class extends Migration
             $table->timestamps();
             $table->timestamp('PerkiraanSampai')->useCurrent();
             $table->string('titikjemput');
+            $table->string('infostatusbykurir')->default('Belum Selesai');
         });
     }
 

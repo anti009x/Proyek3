@@ -167,9 +167,9 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function updategajikurir(Request $request, $kurirs_id){
+    public function updategajikurir(Request $request, $nama_kurir){
   
-        $user = User::where('kurirs_id', $kurirs_id)->first();
+        $user = User::where('nama', $nama_kurir)->first();
     
         if (!$user) {
             return response()->json([
