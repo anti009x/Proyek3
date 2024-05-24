@@ -108,7 +108,7 @@ class InputPesananController extends Controller
             // 'Alamat_Tujuan'=>'required',
             'Nama_Paket'=>'required',
             'Harga_Paket'=>'required',
-            'kurirs_id'=>'required',
+            'kurirs_id',
             'Nama_Kurir'=>'required',
             'status',
             'paket',
@@ -125,6 +125,7 @@ class InputPesananController extends Controller
             'Berat_kg'=>'required',
             'PerkiraanSampai',
             'titikjemput'=>'required',
+            'infostatusbykurir',
         ]);
 
         $validatedData['nama'] = $user->nama;
@@ -171,6 +172,24 @@ class InputPesananController extends Controller
             'data' => $inputPesanan,
             'success' => true
         ], 200);
+    }
+
+    public function updatestatusbykurir(Request $request, $id){
+        $inputPesanan = InputPesanan::find($id);
+
+        if (!$inputPesanan) {
+            return response()->json([
+                'message' => 'Pesanan tidak ditemukan',
+                'success' => false
+            ], 404);
+        }
+
+        $request->validate([
+            'infostatusbykurir',
+        ]);
+
+        $inputPesanan->update($request->only(['infostatusbykurir']));
+        return response()->json(['message' => 'Data Berhasil Diupdate', 'data' => $inputPesanan, 'success' => true], 200);
     }
 
     public function destroy($id)

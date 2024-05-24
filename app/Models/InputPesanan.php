@@ -34,6 +34,7 @@ class InputPesanan extends Model
         'Nama_Kurir',
         'PerkiraanSampai',
         'titikjemput',
+        'infostatusbykurir',
                 
 
 
