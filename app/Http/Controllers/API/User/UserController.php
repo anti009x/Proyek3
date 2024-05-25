@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\VerificationCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -15,45 +16,148 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(),[
-        
-            'nama'=>'required',
-            'nohp'=>'required',
-            'email'=>'required|email',
-            'password'=>'required',
-            'role_id'=>'required',
+            'nama' => 'required',
+            'nohp' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'role_id' => 'required',
             'alamat',
             'gaji',
-
-
         ]);
 
-
-
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
-                'success'=>false,
-                'message' =>'Data Yang Anda Masukan Salah!',
+                'success' => false,
+                'message' => 'Data yang Anda masukkan salah!',
                 'data' => $validator->errors()
             ]);
         }
+
+        $phone_number = preg_replace('/[^0-9]/', '', $request->nohp);
+        if (substr($phone_number, 0, 2) === '08') {
+            $phone_number = '628' . substr($phone_number, 2);
+        }
+
+        $verification = VerificationCode::where('email_or_phone', $phone_number)
+            ->where('verification_type', 'whatsapp')
+            ->where('expire_date', '>', now())
+            ->latest()
+            ->first();
+
+        if (!$verification || !$request->has('code') || $request->code != $verification->code) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Kode verifikasi tidak valid atau belum dimasukkan.'
+            ]);
+        }
+
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
 
         $tokenResult = $user->createToken('auth_token');
-        $success['token'] = $tokenResult->plainTextToken; 
+        $success['token'] = $tokenResult->plainTextToken;
         $success['nama'] = $user->nama;
+
         return response()->json([
             'success' => true,
-            'message'=>'Data Berhasil Diinput',
-            'data'=>$success
-
-
+            'message' => 'Data berhasil diinput',
+            'data' => $success
         ]);
     }
 
+    public function send(Request $request) {
+        $phone_number = $request->input('nohp'); 
+        $phone_number = preg_replace('/[^0-9]/', '', $phone_number);
 
+        $user = User::where('nohp', $phone_number)->first();
+        if ($user) {
+            return response()->json([
+                "success" => false,
+                "message" => "Nomor hp telah digunakan."
+            ]);
+        }
 
+        if (substr($phone_number, 0, 2) === '08') {
+            $phone_number = '628' . substr($phone_number, 2);
+        }
+
+        $countExistingVerif = VerificationCode::where('email_or_phone', $phone_number)
+            ->whereDate('created_at', now()->toDateString())
+            ->count();
+        if ($countExistingVerif >= 15) {
+            return response()->json([
+                "success" => false,
+                "message" => "Nomor ini telah mencapai batas pengiriman harian. Silakan coba lagi besok"
+            ]);
+        }
+
+        $code = $this->generateCode();
+
+        $url = 'https://wa-gateway-production-36b2.up.railway.app/send-message';
+        $postData = [
+            "session" => "mysession",
+            "to" => $phone_number,
+            "text" => "{$code} adalah kode verifikasi anda. Selamat menggunakan SmartHealth",
+        ];
+
+        $response = $this->curl($url, $postData);
+
+        $responseMessage = "";
+        $isSuccess = $response['httpCode'] == 200;
+        if ($isSuccess) {
+            try {
+                VerificationCode::create([
+                    'code' => $code,
+                    'email_or_phone' => $phone_number,
+                    'verification_type' => 'whatsapp',
+                    'expire_date' => now()->addHours(24),
+                ]);
+
+                $responseMessage = "Kode verifikasi berhasil dikirim ke WhatsApp Anda";
+            } catch (\Exception $e) {
+                $responseMessage = "Kode verifikasi gagal dikirim ke WhatsApp Anda (Internal DB Error)";
+            }
+        } else {
+            $responseMessage = "Kode verifikasi gagal dikirim ke WhatsApp Anda (Internal Error)";
+
+            if ($response['response']) {
+                $respWaGateway = json_decode($response['response'])->message;
+                if (preg_match("/is not registered on Whatsapp/i", $respWaGateway)) {
+                    $responseMessage = "Nomor tidak terdaftar di WhatsApp";
+                }
+            }
+        }
+
+        return response()->json([
+            'success' => $isSuccess,
+            'message' => $responseMessage,
+        ]);
+    }
+
+    private function generateCode() {
+        return random_int(100000, 999999);
+    }
+
+    private function curl($remoteUrl, $postData) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $remoteUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        curl_close($ch);
+
+        return [
+            'httpCode' => $httpCode,
+            'response' => $response,
+            'error' => ($httpCode != 200) ?
+                "Failed. HTTP Code: " . $httpCode : null,
+        ];
+    }
     public function login(Request $request)
     {
       

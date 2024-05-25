@@ -20,7 +20,7 @@ return new class extends Migration
         $table->string('email')->unique();
         $table->integer('gaji')->default(0);
         $table->foreignId('kurirs_id')->nullable()->constrained('kurirs');
-  
+        // $table->string('code')->default('NULL');
         $table->string('password');
         $table->rememberToken();
         $table->timestamps();
