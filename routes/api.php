@@ -60,6 +60,8 @@ Route::get('/payment',[PembayaranController::class,'index']);
 Route::post("/register", [UserController::class, "register"]);
 Route::post("/login", [UserController::class, "login"]);
 
+Route::post("/send-otp-wa",[UserController::class,"send"]);
+
     //Pilihan Paket
     Route::get("/input_pilihan_paket", [PilihanPaketController::class, "index"]);
     Route::post("/input_pilihan_paket", [PilihanPaketController::class, "store"]);

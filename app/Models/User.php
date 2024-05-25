@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->belongsTo(Rating::class,'nama','nama');
     }
 
+    // public function VerificationCode(){
+    //     return $this->belongsTo(VerificationCode::class,'nama','nama');
+    // }
+
+
     public function Pengumuman(){
         return $this->belongsTo(Pengumuman::class,'nama','nama');
     }
