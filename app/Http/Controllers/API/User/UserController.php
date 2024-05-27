@@ -98,7 +98,7 @@ class UserController extends Controller
         $postData = [
             "session" => "mysession",
             "to" => $phone_number,
-            "text" => "{$code} adalah kode verifikasi anda. Selamat menggunakan SmartHealth",
+            "text" => "{$code} adalah kode verifikasi anda. Selamat menggunakan AntarIn",
         ];
 
         $response = $this->curl($url, $postData);
