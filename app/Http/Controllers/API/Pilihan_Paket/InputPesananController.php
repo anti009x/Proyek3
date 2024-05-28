@@ -103,6 +103,9 @@ class InputPesananController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+
+    if ($user){
+
         $validatedData = $request->validate([
             'Nama_Barang'=>'required',
             // 'Alamat_Tujuan'=>'required',
@@ -126,6 +129,7 @@ class InputPesananController extends Controller
             'PerkiraanSampai',
             'titikjemput'=>'required',
             'infostatusbykurir',
+            'NomorHpKurir'=>'required'
         ]);
 
         $validatedData['nama'] = $user->nama;
@@ -134,8 +138,10 @@ class InputPesananController extends Controller
 
         // Load data kurir terkait dengan pesanan yang baru dibuat
         $inputPesanan->load('kurir');
-
         return response()->json(['message' => 'Data Berhasil Ditambahkan', 'data' => $inputPesanan], 200);
+    }
+
+
     }
 
     public function show(InputPesanan $inputPesanan)
@@ -192,16 +198,31 @@ class InputPesananController extends Controller
         return response()->json(['message' => 'Data Berhasil Diupdate', 'data' => $inputPesanan, 'success' => true], 200);
     }
 
-    public function destroy($id)
+    public function destroypesanan($id)
     {
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized access'], 401);
+        }
+
         $inputPesanan = InputPesanan::find($id);
 
         if (!$inputPesanan) {
             return response()->json(['message' => 'Data Tidak Ditemukan!'], 404);
         }
 
-        $inputPesanan->delete();
+        if ($inputPesanan->nama != $user->nama) {
+            return response()->json(['message' => 'Anda tidak memiliki hak untuk menghapus pesanan ini'], 403);
+        }
 
-        return response()->json(['message' => 'Data Berhasil Dihapus'], 200);
+        $inputPesanan->delete();
+        return response()->json([
+            'data' => $inputPesanan,
+            'message' => 'Data Berhasil Dihapus'
+        ], 200);
     }
+
+  
+
 }
