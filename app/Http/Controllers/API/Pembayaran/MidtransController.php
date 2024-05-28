@@ -97,6 +97,33 @@ class MidtransController extends Controller
             ]);
         }
     }
+    public function desytroypembayaran($id){
+
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized access'], 401);
+        }
+
+        $hapuspembayaran = $this->model::where('id', $id)->first();
+
+        if (!$hapuspembayaran) {
+            return response()->json(['message' => 'Data Tidak Ditemukan!'], 404);
+        }
+
+        if ($hapuspembayaran->userss_id != $user->id) {
+            return response()->json(['message' => 'Anda tidak memiliki hak untuk menghapus pesanan ini'], 403);
+        }
+
+        $hapuspembayaran->delete();
+        return response()->json([
+            'data' => $hapuspembayaran,
+            'message' => 'Data Berhasil Dihapus'
+        ], 200);
+    }
+
+
+    
 
     public function updatesaldo(Request $request){
         $user = Auth::user();

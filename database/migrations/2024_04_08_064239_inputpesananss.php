@@ -39,6 +39,7 @@ return new class extends Migration
             $table->timestamp('PerkiraanSampai')->useCurrent();
             $table->string('titikjemput');
             $table->string('infostatusbykurir')->default('Belum Selesai');
+            $table->string('NomorHpKurir');
         });
     }
 

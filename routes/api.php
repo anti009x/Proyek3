@@ -89,11 +89,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get("/riwayatpesanan/{id}", [InputPesananController::class, "riwayatpesananbyid"]);
     Route::post("/inputpesanan", [InputPesananController::class, "store"]);
     Route::put("/inputpesanan/{id}", [InputPesananController::class, "update"]);
-    Route::delete("/inputpesanan/{id}", [InputPesananController::class, "destroy"]);
+    Route::delete("/inputpesanan/{id}", [InputPesananController::class, "destroypesanan"]);
     Route::get("/riwayatpesananuser", [InputPesananController::class, "allriwayatpesanan"]);
     Route::get("/riwayatpesananuser/{id}", [InputPesananController::class, "allriwayatpesananbyuser"]);
     Route::put("/riwayatpesananuser/{id}", [InputPesananController::class, "allriwayatpesananbyuserupdate"]);
     Route::put('/updatestatusbykurir/{id}',[InputPesananController::class,'updatestatusbykurir']);
+
+
 
     //Data Kurir
     Route::get("/kurir",[KurirController::class,"index"]);
@@ -122,6 +124,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         //Raja Ongkir
         Route::get('/riwayatpembayaran',[MidtransController::class,'riwayatopup']);
+        Route::delete('/desytroypembayaran/{id}',[MidtransController::class,'desytroypembayaran']);
         Route::get('/riwayatpembayaran/{id}',[MidtransController::class,'riwayatopupbyid']);
         Route::get('/riwayatpembayaranbysaldo',[MidtransController::class,'riwayatopupbysaldo']);
         Route::put('/udpdatesaldo',[MidtransController::class,'updatesaldo']);
