@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function Pesan()
     {
-        return $this->belongsTo(Pesan::class, 'nama', 'nama');
+        return $this->belongsTo(Pesan::class, 'nama_pengirim', 'nama_penerima');
     }
 
     public function Rating(){

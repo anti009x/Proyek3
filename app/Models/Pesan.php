@@ -13,13 +13,14 @@ class Pesan extends Model
 
     protected $fillable = [
         'kirim_pesan',
-        'nama',
+        'nama_pengirim',
+        'nama_penerima',
         'userss_id',
 
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'nama', 'nama');
+        return $this->belongsTo(User::class, 'nama_pengirim', 'nama_penerima');
     }
 }
