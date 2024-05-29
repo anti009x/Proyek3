@@ -101,6 +101,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/kurir",[KurirController::class,"index"]);
 
     Route::post("/pesan",[PesanController::class,"kirimpesan"]);
+    Route::get("/riwayatpesan", [PesanController::class, "riwayatpesan"]);
+    Route::get("/riwayatpesan/{id}", [PesanController::class, "riwayatpesanbyid"]);
 
         //Akun Konsumen
         Route::get("/logout",[UserController::class,"logout"]);

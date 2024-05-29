@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('userss_id')->constrained('userss');
             // $table->string('pengirim');
-            $table->string('kirim_pesan')->default('Test');
-            $table->string('nama');
+            $table->string('nama_pengirim');
+            $table->string('kirim_pesan');
+            $table->string('nama_penerima');
             $table->timestamps();
         });
     }
