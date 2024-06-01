@@ -96,6 +96,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/updatestatusbykurir/{id}',[InputPesananController::class,'updatestatusbykurir']);
 
 
+    Route::put("/changepassword/{email}",[UserController::class,"changepassword"]);
 
     //Data Kurir
     Route::get("/kurir",[KurirController::class,"index"]);
