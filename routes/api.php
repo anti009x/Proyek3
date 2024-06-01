@@ -40,7 +40,7 @@ Route::put('/updategajikurir/{nama_kurir}',[UserController::class,'updategajikur
 Route::post('/aftherpay',[MidtransController::class,'afterpay']);
 Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
 
-
+Route::put("/changepassword/{email}",[UserController::class,"changepassword"]);
 
 
 
@@ -96,7 +96,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/updatestatusbykurir/{id}',[InputPesananController::class,'updatestatusbykurir']);
 
 
-    Route::put("/changepassword/{email}",[UserController::class,"changepassword"]);
+
 
     //Data Kurir
     Route::get("/kurir",[KurirController::class,"index"]);

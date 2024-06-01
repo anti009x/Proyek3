@@ -325,13 +325,34 @@ class UserController extends Controller
 
     public function changepassword(Request $request, $email){
         $user = User::where('email', $email)->first();
-        $password = $request->password;
-        $confirmasipassword = $request->confirmasipassword;
-        if (!$user){
+
+        if (!$user) {
+            return response()->json([
+                // 'message' => false,
+                'message' => 'Email Tidak Ditemukan',
+            ],404);
+        }
+
+        if ($user){
+            return response()->json([
+                // 'message'=>true,
+                'message' => 'Email Ditemukan',
+            ],200);
+        }
+
+        if ($user){
             return response()->json([
                 'message' => 'Email Tidak Ditemukan',
             ],404);
         }
+
+        $password = $request->password;
+        $confirmasipassword = $request->confirmasipassword;
+        // if (!$user){
+        //     return response()->json([
+        //         'message' => 'Email Tidak Ditemukan',
+        //     ],404);
+        // }
 
         if ($password != $confirmasipassword ){
             return response()->json([
