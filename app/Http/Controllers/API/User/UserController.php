@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Log;
+
+use function Laravel\Prompts\password;
+
 class UserController extends Controller
 {   
     use HasApiTokens;
@@ -319,5 +322,36 @@ class UserController extends Controller
             'data' => $kurir
         ],200);
     }
+
+    public function changepassword(Request $request, $email){
+        $user = User::where('email', $email)->first();
+        $password = $request->password;
+        $confirmasipassword = $request->confirmasipassword;
+        if (!$user){
+            return response()->json([
+                'message' => 'Email Tidak Ditemukan',
+            ],404);
+        }
+
+        if ($password != $confirmasipassword ){
+            return response()->json([
+                'message' => 'Password Tidak Sama',
+                'data' => 'Password Tidak Sama',
+            ],404);
+        }
+
+        $request->validate([
+            'password' => 'required',
+            'confirmasipassword' => 'required|same:password',
+        ]);
+
+        $user->update(['password' => bcrypt($request->password)]);
+        return response()->json([
+            'message' => 'Password Berhasil Diubah',
+            'data' => $user,
+            'success' => true
+        ], 200);
+    }
+
 }
 
