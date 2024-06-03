@@ -63,6 +63,7 @@ Route::post("/register", [UserController::class, "register"]);
 Route::post("/login", [UserController::class, "login"]);
 
 Route::post("/send-otp-wa",[UserController::class,"send"]);
+Route::post("/send-otp-email",[UserController::class,"sendemail"]);
 
     //Pilihan Paket
     Route::get("/input_pilihan_paket", [PilihanPaketController::class, "index"]);
