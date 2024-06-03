@@ -42,6 +42,8 @@ Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
 
 Route::put("/changepassword/{email}",[UserController::class,"changepassword"]);
 
+Route::put("/checkemail/{email}",[UserController::class,"checkavaiblemail"]);
+
 
 
 //Route Taroh Disini Ya!
