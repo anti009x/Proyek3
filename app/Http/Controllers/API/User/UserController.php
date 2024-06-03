@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Log;
+// use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
 use function Laravel\Prompts\password;
 
@@ -333,18 +335,18 @@ class UserController extends Controller
             ],404);
         }
 
-        if ($user){
-            return response()->json([
-                // 'message'=>true,
-                'message' => 'Email Ditemukan',
-            ],200);
-        }
+        // if ($user){
+        //     return response()->json([
+        //         // 'message'=>true,
+        //         'message' => 'Email Ditemukan',
+        //     ],200);
+        // }
 
-        if ($user){
-            return response()->json([
-                'message' => 'Email Tidak Ditemukan',
-            ],404);
-        }
+        // if ($user){
+        //     return response()->json([
+        //         'message' => 'Email Tidak Ditemukan',
+        //     ],404);
+        // }
 
         $password = $request->password;
         $confirmasipassword = $request->confirmasipassword;
@@ -372,6 +374,24 @@ class UserController extends Controller
             'data' => $user,
             'success' => true
         ], 200);
+    }
+
+    
+    public function checkavaiblemail(Request $request, $email) {
+        
+        $user = User::where('email', $email)->first();
+        if ($user){
+            return response ()->json([
+            'message' => 'Email Ditemukan'
+            ],200);
+            
+        }
+
+        if (!$user){
+            return response ()->json([
+                'message' => 'Email Tidak Ditemukan'
+                ],200);
+        }
     }
 
 }
