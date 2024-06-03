@@ -328,37 +328,22 @@ class UserController extends Controller
 
         if (!$user) {
             return response()->json([
-                // 'message' => false,
                 'message' => 'Email Tidak Ditemukan',
-            ],404);
+            ], 404);
         }
 
-        if ($user){
-            return response()->json([
-                // 'message'=>true,
-                'message' => 'Email Ditemukan',
-            ],200);
-        }
+        
 
-        if ($user){
-            return response()->json([
-                'message' => 'Email Tidak Ditemukan',
-            ],404);
-        }
+
+
 
         $password = $request->password;
         $confirmasipassword = $request->confirmasipassword;
-        // if (!$user){
-        //     return response()->json([
-        //         'message' => 'Email Tidak Ditemukan',
-        //     ],404);
-        // }
 
-        if ($password != $confirmasipassword ){
+        if ($password !== $confirmasipassword) {
             return response()->json([
                 'message' => 'Password Tidak Sama',
-                'data' => 'Password Tidak Sama',
-            ],404);
+            ], 400);
         }
 
         $request->validate([
@@ -366,13 +351,13 @@ class UserController extends Controller
             'confirmasipassword' => 'required|same:password',
         ]);
 
-        $user->update(['password' => bcrypt($request->password)]);
+        $user->update(['password' => bcrypt($password)]);
+
         return response()->json([
             'message' => 'Password Berhasil Diubah',
             'data' => $user,
             'success' => true
         ], 200);
     }
-
 }
 
