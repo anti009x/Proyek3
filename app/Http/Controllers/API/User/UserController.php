@@ -100,7 +100,7 @@ class UserController extends Controller
 
         $code = $this->generateCode();
 
-        $url = 'https://wa-gateway-production-36b2.up.railway.app/send-message';
+        $url = 'https://dwa-gateway-production.up.railway.app/send-message';
         $postData = [
             "session" => "mysession",
             "to" => $phone_number,
