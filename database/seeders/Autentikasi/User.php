@@ -26,7 +26,7 @@ class User extends Seeder
             DB::table('userss')->insert([
                 'nama'=>'sulse',
                 'nohp'=>'62812345678901',
-                'email'=>'a@gmail.com',
+                'email'=>'riskisuleman2011@gmail.com',
                 'password'=>bcrypt(1),
                 'role_id'=>2,
                 'created_at' => now(),
