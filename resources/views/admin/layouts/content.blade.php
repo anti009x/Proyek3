@@ -1,15 +1,7 @@
 
 <div class="container">
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
-    <h1>Hellosdfgkhdfkghkfdghkdfg</h1>
+    {{-- @include('admin.layouts.sidebar') --}}
+    {{-- @include('admin.layouts.topbar')
+    @include('admin.layouts.content') --}}
 </div>
 
