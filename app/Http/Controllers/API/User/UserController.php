@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OTPEmail;
 use App\Models\User;
 use App\Models\VerificationCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+// use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+
+use function Laravel\Prompts\password;
+
 class UserController extends Controller
 {   
     use HasApiTokens;
@@ -94,7 +100,7 @@ class UserController extends Controller
 
         $code = $this->generateCode();
 
-        $url = 'https://wa-gateway-production-36b2.up.railway.app/send-message';
+        $url = 'https://dwa-gateway-production.up.railway.app/send-message';
         $postData = [
             "session" => "mysession",
             "to" => $phone_number,
@@ -319,5 +325,126 @@ class UserController extends Controller
             'data' => $kurir
         ],200);
     }
-}
 
+
+ 
+    public function sendemail(Request $request) {
+        $email = $request->input('email'); 
+        
+        // Validate email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return response()->json([
+                "success" => false,
+                "message" => "Format email tidak valid."
+            ], 400);
+        }
+
+        // $user = User::where('email', $email)->first();
+        // if ($user) {
+        //     return response()->json([
+        //         "success" => false,
+        //         "message" => "Email telah digunakan."
+        //     ], 409);
+        // }
+
+        $countExistingVerif = VerificationCode::where('email_or_phone', $email)
+            ->whereDate('created_at', now()->toDateString())
+            ->count();
+        if ($countExistingVerif >= 15) {
+            return response()->json([
+                "success" => false,
+                "message" => "Email ini telah mencapai batas pengiriman harian. Silakan coba lagi besok"
+            ], 429); 
+        }
+
+        $code = $this->generateCode();
+
+        $details = [
+            'subject' => "{$code} adalah kode verifikasi Anda Untuk Reset Password",
+            'verif_code' => $code,
+            'email' => $email 
+        ];
+
+        Mail::to($email)->send(new OTPEmail($details));
+
+        VerificationCode::create([
+            'code' => $code,
+            'email_or_phone' => $email,
+            'verification_type' => 'email',
+            'expire_date' => now()->addHours(24),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Kode verifikasi berhasil dikirim ke Email Anda",
+        ], 200);
+    }
+    public function changepassword(Request $request, $email){
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return response()->json([
+                'message' => 'Format email tidak valid',
+            ], 400);
+        }
+
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Email Tidak Ditemukan',
+            ], 404);
+        }
+
+        $verification = VerificationCode::where('email_or_phone', $email)
+            ->where('verification_type', 'email')
+            ->where('expire_date', '>', now())
+            ->latest()
+            ->first();
+
+        if (!$verification || !$request->has('code') || $request->code != $verification->code) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Kode verifikasi tidak valid atau belum dimasukkan.'
+            ], 400); 
+        }
+
+        $password = $request->password;
+        $confirmasipassword = $request->confirmasipassword;
+
+        if ($password != $confirmasipassword ){
+            return response()->json([
+                'message' => 'Password Tidak Sama',
+            ], 400);
+        }
+
+        $request->validate([
+            'password' => 'required',
+            'confirmasipassword' => 'required|same:password',
+        ]);
+
+        $user->update(['password' => bcrypt($request->password)]);
+        return response()->json([
+            'message' => 'Password Berhasil Diubah',
+            'data' => $user,
+            'success' => true
+        ], 200);
+    }
+
+    
+    public function checkavaiblemail(Request $request, $email) {
+        
+        $user = User::where('email', $email)->first();
+        if ($user){
+            return response ()->json([
+            'message' => 'Email Ditemukan'
+            ],200);
+            
+        }
+
+        if (!$user){
+            return response ()->json([
+                'message' => 'Email Tidak Ditemukan'
+                ],200);
+        }
+    }
+
+}
