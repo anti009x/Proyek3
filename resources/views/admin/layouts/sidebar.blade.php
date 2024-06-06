@@ -2,7 +2,7 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark " style="width: 40vh; height: 100vh; margin-top: 0.0.vh;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="fs-4">Sidebar</span>
+      <span class="fs-4"><img src='/img/logo.png' width="75px" height="75px"/>Antar-In</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
