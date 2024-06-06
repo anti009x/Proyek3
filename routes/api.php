@@ -40,7 +40,9 @@ Route::put('/updategajikurir/{nama_kurir}',[UserController::class,'updategajikur
 Route::post('/aftherpay',[MidtransController::class,'afterpay']);
 Route::post('/afther-payment',[MidtransController::class,'aftherpay']);
 
+Route::put("/changepassword/{email}",[UserController::class,"changepassword"]);
 
+Route::put("/checkemail/{email}",[UserController::class,"checkavaiblemail"]);
 
 
 
@@ -61,6 +63,7 @@ Route::post("/register", [UserController::class, "register"]);
 Route::post("/login", [UserController::class, "login"]);
 
 Route::post("/send-otp-wa",[UserController::class,"send"]);
+Route::post("/send-otp-email",[UserController::class,"sendemail"]);
 
     //Pilihan Paket
     Route::get("/input_pilihan_paket", [PilihanPaketController::class, "index"]);
@@ -94,6 +97,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("/riwayatpesananuser/{id}", [InputPesananController::class, "allriwayatpesananbyuser"]);
     Route::put("/riwayatpesananuser/{id}", [InputPesananController::class, "allriwayatpesananbyuserupdate"]);
     Route::put('/updatestatusbykurir/{id}',[InputPesananController::class,'updatestatusbykurir']);
+
 
 
 

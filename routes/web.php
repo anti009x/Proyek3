@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\Admin\AdminController;
 use App\Http\Controllers\TestDiagnosaController;
+use App\Http\Controllers\WEB\Admin\Login\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
