@@ -23,6 +23,7 @@ return new class extends Migration
         // $table->string('code')->default('NULL');
         $table->string('password');
         $table->rememberToken();
+        $table->integer('limit_rating')->default(0);
         $table->timestamps();
       });
     }
