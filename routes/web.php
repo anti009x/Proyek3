@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\Admin\AdminController;
+use App\Http\Controllers\API\Admin\PesananController;
+use App\Http\Controllers\API\Admin\UserController;
 use App\Http\Controllers\TestDiagnosaController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +24,6 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', [AdminController::class, 'index']);
+Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan');
+Route::get('/user', [UserController::class, 'index'])->name('user');
 
