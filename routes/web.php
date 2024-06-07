@@ -20,3 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 
 });
+
+
+Route::get('/dashboard', [AdminController::class, 'index']);

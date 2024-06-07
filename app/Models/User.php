@@ -24,6 +24,7 @@ class User extends Authenticatable
         'role_id',
         'alamat',
         'gaji',
+        'limit_rating',
         // 'kurirs_id'
     ];
 

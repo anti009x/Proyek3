@@ -136,6 +136,10 @@ class InputPesananController extends Controller
         $validatedData['alamat'] = $user->alamat;
         $inputPesanan = InputPesanan::create($validatedData);
 
+        $user = $request->user();
+        $user->limit_rating += 1;
+        $user->save();
+
         // Load data kurir terkait dengan pesanan yang baru dibuat
         $inputPesanan->load('kurir');
         return response()->json(['message' => 'Data Berhasil Ditambahkan', 'data' => $inputPesanan], 200);
