@@ -25,5 +25,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [AdminController::class, 'index']);
 Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan');
+Route::get('/pilihanpaket', [PesananController::class, 'viewpesanan'])->name('pilihanpaket');
+Route::delete('/pilihanpaket/{id}', [PesananController::class, 'delete'])->name('pilihanpaket.delete');
+Route::post('/pilihanpaket', [PesananController::class, 'store'])->name('pilihanpaket.store');
+Route::put('/pilihanpaket/{id}', [PesananController::class, 'update'])->name('pilihanpaket.update');
 Route::get('/user', [UserController::class, 'index'])->name('user');
 
