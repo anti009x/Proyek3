@@ -20,8 +20,11 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $auth = Auth::user();
             $auth->getAuthIdentifier();
-            return redirect('dashboard')->with('success');
-
+            if ($auth->role_id === 1) {
+                return redirect('dashboard')->with('success', 'Login successful');
+            } else {
+                return redirect('login')->with('error', 'Unauthorized access');
+            }
         } else {
             return redirect('login')->with('error', $errors);
         }
@@ -29,7 +32,6 @@ class LoginController extends Controller
 
     public function logout(){
         Session::flush();
-        
         Auth::logout();
 
         return redirect('login')->with('success');
