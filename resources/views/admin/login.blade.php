@@ -2,17 +2,25 @@
 
 @section('template')
 
+@if (session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
+
 <div class="container d-flex justify-content-center align-items-center vh-100">
-<form>
+
+  <form action="{{ route('postlogin') }}" method="POST">
+    @csrf
     <!-- Email input -->
-    <div data-mdb-input-init class="form-outline mb-4">
-      <input type="email" id="form2Example1" class="form-control" />
+    <div class="form-outline mb-4">
+      <input type="email" id="form2Example1" class="form-control" name="email" required />
       <label class="form-label" for="form2Example1">Email address</label>
     </div>
   
     <!-- Password input -->
-    <div data-mdb-input-init class="form-outline mb-4">
-      <input type="password" id="form2Example2" class="form-control" />
+    <div class="form-outline mb-4">
+      <input type="password" id="form2Example2" class="form-control" name="password" required />
       <label class="form-label" for="form2Example2">Password</label>
     </div>
   
@@ -33,7 +41,8 @@
     </div>
   
     <!-- Submit button -->
-    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Sign in</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
   
     <!-- Register buttons -->
     <div class="text-center">
@@ -55,7 +64,8 @@
         <i class="fab fa-github"></i>
       </button>
     </div>
-  </form>
+
 </div>
+</form>
 @endsection
 
