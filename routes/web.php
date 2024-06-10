@@ -33,10 +33,15 @@ Route::put('/pilihanpaket/{id}', [PesananController::class, 'update'])->name('pi
 // Route::get('/user', [UserController::class, 'index'])->name('user');
 
 
-Route::get('/user', [UserController::class, 'index'])->name('user');
+// Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::delete('/user/{id}', [UserController::class, 'delete'])->name('user.delete');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
 Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+
+
+Route::get('/admin', [UserController::class,'admin'])->name('admin');
+Route::get('/konsumen', [UserController::class,'konsumen'])->name('konsumen');
+Route::get('/kurir', [UserController::class,'kurir'])->name('kurir');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 

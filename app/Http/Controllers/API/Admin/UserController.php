@@ -8,11 +8,37 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function admin()
     {
         $User = User::paginate(5); 
-    
-        return view('admin.user', ['User' => $User]);
+
+
+        if ($User) {
+            $User = User::where('role_id', 1)->paginate(5);
+            return view('admin.user.admin', ['User' => $User]);
+        }
+    }
+
+    public function konsumen()
+    {
+        $User = User::paginate(5); 
+
+
+        if ($User) {
+            $User = User::where('role_id', 2)->paginate(5);
+            return view('admin.user.konsumen', ['User' => $User]);
+        }
+    }
+
+    public function kurir()
+    {
+        $User = User::paginate(5); 
+
+
+        if ($User) {
+            $User = User::where('role_id', 3)->paginate(5);
+            return view('admin.user.konsumen', ['User' => $User]);
+        }
     }
 
     public function delete($id)
