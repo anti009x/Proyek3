@@ -38,10 +38,25 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="{{ route('user') }}" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#user" aria-expanded="false" aria-controls="user">
                         <i class="lni lni-user"></i>
-                        <span>User</span>
+                        <span>Pengguna</span>
                     </a>
+                    <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href={{route('admin')}} class="sidebar-link">Admin</a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href={{route('konsumen')}} class="sidebar-link">Konsumen</a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href={{route('kurir')}} class="sidebar-link">Kurir</a>
+                        </li>
+                        
+                    </ul>
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('pesanan') }}" class="sidebar-link">
@@ -64,29 +79,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                        <i class="lni lni-layout"></i>
-                        <span>Multi Level</span>
-                    </a>
-                    <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                                Two Links
-                            </a>
-                            <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+             
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-popup"></i>
