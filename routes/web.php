@@ -45,3 +45,6 @@ Route::get('/kurir', [UserController::class,'kurir'])->name('kurir');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::post('/postlogin', [LoginController::class, 'login'])->name('postlogin');
