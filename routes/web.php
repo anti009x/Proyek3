@@ -24,7 +24,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', [AdminController::class, 'index']);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+Route::post('/postlogin', [LoginController::class, 'login'])->name('postlogin');
+
+Route::middleware(['auth', 'ceklevel:1'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    
 Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan');
 Route::get('/pilihanpaket', [PesananController::class, 'viewpesanan'])->name('pilihanpaket');
 Route::delete('/pilihanpaket/{id}', [PesananController::class, 'delete'])->name('pilihanpaket.delete');
@@ -43,8 +50,6 @@ Route::get('/admin', [UserController::class,'admin'])->name('admin');
 Route::get('/konsumen', [UserController::class,'konsumen'])->name('konsumen');
 Route::get('/kurir', [UserController::class,'kurir'])->name('kurir');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::any('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::post('/postlogin', [LoginController::class, 'login'])->name('postlogin');
+});

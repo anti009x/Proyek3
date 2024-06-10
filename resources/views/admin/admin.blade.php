@@ -33,7 +33,7 @@
                     <i class="lni lni-grid-alt"></i>
                 </button>
                 <div class="sidebar-logo">
-                    <a href="#">CodzSword</a>
+                    <a href="#">AntarIn</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
@@ -64,7 +64,7 @@
                         <span>Pesanan</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                {{-- <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-protection"></i>
@@ -78,7 +78,7 @@
                             <a href="#" class="sidebar-link">Register</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
              
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
