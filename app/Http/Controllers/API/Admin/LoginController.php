@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
     public function index (Request $request){
-        return view('admin.login');
+        return view('MainDashboard.Admin.Login.login');
     }
 
     public function login (Request $request):RedirectResponse{

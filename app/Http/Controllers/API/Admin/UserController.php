@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -18,6 +19,43 @@ class UserController extends Controller
             return view('admin.user.admin', ['User' => $User]);
         }
     }
+    public function userData(Request $request)
+    {
+        $query = User::query();
+
+        if ($request->filled('nama') || $request->filled('email') || $request->filled('query')) {
+            $query->where('role_id', 2);
+
+            if ($request->filled('nama')) {
+                $query->where('nama', 'like', '%' . $request->input('nama') . '%');
+            }
+
+            if ($request->filled('email')) {
+                $query->where('email', 'like', '%' . $request->input('email') . '%');
+            }
+        } else {
+            $query->whereNull('id'); 
+            return redirect()->route('pengguna');
+        }
+
+        $users = $query->paginate(5);
+
+        if ($request->wantsJson()) {
+            return response()->json($users);
+        }
+
+        return view('MainDashboard.Admin.DataAkun.table_konsumen', ['User' => $users]);
+    }
+
+    
+
+
+    public function index()
+    {
+        return view('MainDashboard.Admin.DataAkun.server_status');
+    }
+
+
 
     public function konsumen()
     {
@@ -26,7 +64,7 @@ class UserController extends Controller
 
         if ($User) {
             $User = User::where('role_id', 2)->paginate(5);
-            return view('admin.user.konsumen', ['User' => $User]);
+            return view('MainDashboard.Admin.DataAkun.table_konsumen', ['User' => $User]);
         }
     }
 

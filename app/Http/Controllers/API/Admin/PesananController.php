@@ -11,7 +11,7 @@ class PesananController extends Controller
     public function index()
     {
         $PilihanPaket = PilihanPaket::paginate(5); 
-        return view('admin.pesanan', ['PilihanPaket' => $PilihanPaket]);
+        // return view('MainDashboard.Admin.PilihanPaket.index', ['PilihanPaket' => $PilihanPaket]);
     }
     public function delete($id)
     {
