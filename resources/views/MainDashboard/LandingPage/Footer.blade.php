@@ -6,16 +6,15 @@
             <div class="bg-dark card p-5 shadow-lg">
                 <div>
                     {{-- <h1 class="fw-bold text-white">BERIKAN SARAN UNTUK KAMI</h1> --}}
-                    <p class=" text-white">Berikan Masukan Untuk Kami Agar Kami Dapat Menjadi Lebih Baik</p>
+                    <p class=" text-white">Informasi Lebih Lanjut Mengenai Layanan Kami</p>
                 </div>
-                <form>
-                    <div class="mb-3">
-                        <textarea class="form-control" placeholder="Tulis saran Anda di sini..." rows="4"></textarea>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary"> <i class="bi bi-send-x-fill"></i></button>
-                    </div>
-                </form>
+
+                <div>
+
+                    <img src="{{ asset('img/PengenalanAntarIn.png') }}" class="img-fluid">
+
+                </div>    
+             
             </div>
         </div>
     </div>

@@ -2,6 +2,18 @@
 
 @section('dashboard')
 
+@if(session('success'))
+    <script>
+        alert('{{ session('success') }}');
+    </script>
+@endif
+
+@if(session('error'))
+    <script>
+        alert('{{ session('error') }}');
+    </script>
+@endif
+
     <header class="bg-dark py-5">
 
         <div class="container px-5">
@@ -77,7 +89,7 @@
 
 
     @include('MainDashboard.LandingPage.Mitra')
-    @yield('status-indicator')
+    {{-- @yield('status-indicator') --}}
 
     @include('MainDashboard.LandingPage.Footer')
 

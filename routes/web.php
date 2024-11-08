@@ -62,6 +62,9 @@ Route::any('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/userData', [UserController::class, 'userData'])->name('userData');
 Route::get('/chatting', [ChattingController::class, 'index'])->name('chatting');
 Route::post('/sendMessage', [ChattingController::class, 'sendMessage'])->name('sendMessage');
-// Route::get('health', HealthCheckResultsController::class);
 
+// Route::get('health', HealthCheckResultsController::class);
+Route::get('/chat-data', [ChattingController::class, 'getChatData'])->name('getChatData');
+Route::post('/deleteCookie', [ChattingController::class, 'deleteCookie'])->name('deleteCookie');
+Route::post('/sendTiket', [ChattingController::class, 'sendTiket'])->name('sendTiket');
 });
